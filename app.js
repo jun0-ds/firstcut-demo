@@ -1056,17 +1056,24 @@
 
     var avgData = DATA.meta.subject_averages || {};
 
-    // 통합 요약 테이블
-    renderSummaryTable(grouped, avgData);
+    // 시뮬레이션 엔진 실행
+    var simResults = runSimulationEngine(grouped);
 
-    // 종합 분석 (축약)
-    renderInterpretation(grouped, avgData);
+    // 통합 요약 테이블 (시뮬레이션 결과 전달)
+    renderSummaryTable(grouped, avgData, simResults);
+
+    // 종합 분석 (축약, 시뮬레이션 결과 사용)
+    renderInterpretation(grouped, avgData, simResults);
 
     // 히스토그램
     renderHistogramTabs(grouped);
   }
 
-  // --- 통합 요약 테이블 ---
+  // =====================
+  // 시뮬레이션 엔진 (Python 코어 로직 포팅)
+  // =====================
+
+  // --- percentile 계산 (inference.py의 estimate_cutline 포팅) ---
   function computePercentile(arr, pct) {
     var sorted = arr.slice().sort(function (a, b) { return a - b; });
     var idx = (pct / 100) * (sorted.length - 1);
@@ -1075,6 +1082,110 @@
     if (lo === hi) return sorted[lo];
     return sorted[lo] + (sorted[hi] - sorted[lo]) * (idx - lo);
   }
+
+  // --- 부트스트랩 신뢰구간 (inference.py의 confidence_interval 포팅) ---
+  function bootstrapCI(scores, pct, nBoot, confidence) {
+    nBoot = nBoot || 300;
+    confidence = confidence || 0.95;
+    var len = scores.length;
+    var estimates = [];
+    for (var i = 0; i < nBoot; i++) {
+      var resample = new Array(len);
+      for (var j = 0; j < len; j++) {
+        resample[j] = scores[Math.floor(Math.random() * len)];
+      }
+      estimates.push(computePercentile(resample, pct));
+    }
+    estimates.sort(function (a, b) { return a - b; });
+    var alpha = (1 - confidence) / 2;
+    return {
+      lower: estimates[Math.floor(alpha * estimates.length)],
+      estimate: estimates[Math.floor(0.5 * estimates.length)],
+      upper: estimates[Math.floor((1 - alpha) * estimates.length)]
+    };
+  }
+
+  // --- 편향 감지 (distribution.py 비교 로직 포팅) ---
+  // 업로드 데이터는 원점수, dist_data.json은 표준점수이므로 원점수로 변환하여 비교
+  function detectBias(scores, subject) {
+    if (!DIST_DATA || !DIST_DATA[subject]) return null;
+
+    var raw = DIST_DATA[subject];
+    // 모집단을 원점수로 변환하여 통계 계산
+    var popTotal = 0;
+    var popSum = 0;
+    var popScoresRaw = []; // 원점수 변환된 모집단
+    for (var i = 0; i < raw.scores.length; i++) {
+      var rawScore = standardToRaw(raw.scores[i]);
+      popTotal += raw.counts[i];
+      popSum += rawScore * raw.counts[i];
+      for (var j = 0; j < raw.counts[i]; j++) {
+        popScoresRaw.push(rawScore);
+      }
+    }
+    var popMean = popSum / popTotal;
+
+    // 모집단 상위 10% 임계점 (원점수 기준)
+    popScoresRaw.sort(function (a, b) { return a - b; });
+    var popTop10Threshold = computePercentile(popScoresRaw, 90);
+    var popTop10Count = 0;
+    for (var i = 0; i < popScoresRaw.length; i++) {
+      if (popScoresRaw[i] >= popTop10Threshold) popTop10Count++;
+    }
+    var popTop10Ratio = popTop10Count / popTotal;
+
+    // 업로드 데이터 통계 (이미 원점수)
+    var sampleSum = 0;
+    var sampleTop10Count = 0;
+    for (var i = 0; i < scores.length; i++) {
+      sampleSum += scores[i];
+      if (scores[i] >= popTop10Threshold) sampleTop10Count++;
+    }
+    var sampleMean = sampleSum / scores.length;
+    var sampleTop10Ratio = sampleTop10Count / scores.length;
+
+    // 편향 판정
+    var meanDiff = sampleMean - popMean;
+    var top10Diff = sampleTop10Ratio - popTop10Ratio;
+    var biased = (meanDiff > 3) || (top10Diff > 0.05);
+
+    return {
+      biased: biased,
+      meanDiff: meanDiff,
+      popMean: popMean,
+      sampleMean: sampleMean,
+      top10Diff: top10Diff,
+      popTop10Ratio: popTop10Ratio,
+      sampleTop10Ratio: sampleTop10Ratio
+    };
+  }
+
+  // --- 과목별 시뮬레이션 실행 ---
+  function runSimulationEngine(grouped) {
+    var results = {};
+    for (var subj in grouped) {
+      var scores = grouped[subj];
+      var n = scores.length;
+
+      // 부트스트랩 기반 1등급컷 추정 + 신뢰구간
+      var ci = bootstrapCI(scores, 96, 300, 0.95);
+
+      // 편향 감지 (국어/수학만 — dist_data.json에 있는 과목)
+      var bias = detectBias(scores, subj);
+
+      results[subj] = {
+        n: n,
+        cutEstimate: Math.round(ci.estimate),
+        ciLower: Math.round(ci.lower),
+        ciUpper: Math.round(ci.upper),
+        ciWidth: Math.round(ci.upper) - Math.round(ci.lower),
+        bias: bias
+      };
+    }
+    return results;
+  }
+
+  // --- 통합 요약 테이블 ---
 
   function findClosestMAE(subject, sampleSize) {
     var simData = DATA.simulation[subject];
@@ -1091,28 +1202,35 @@
     return closest;
   }
 
-  function renderSummaryTable(grouped, avgData) {
+  function renderSummaryTable(grouped, avgData, simResults) {
     var container = document.getElementById("results-summary-table");
     var html = '<table class="results-summary-table">';
-    html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급컷 예측</th><th>예측 정확도</th><th>5개년 평균 대비</th></tr></thead>';
+    html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급컷 예측</th><th>예측 범위</th><th>신뢰도</th><th>5개년 평균 대비</th></tr></thead>';
     html += '<tbody>';
+
+    var hasBiasWarning = false;
+    var biasWarnings = [];
+
     for (var subj in grouped) {
       var scores = grouped[subj];
       var n = scores.length;
-      var cutline = computePercentile(scores, 96);
-      var ref = findClosestMAE(subj, n);
+      var sim = simResults[subj];
       var avgRef = avgData[subj];
 
-      // 정확도 — 신뢰도 텍스트로
-      var maeText = "--";
-      var confClass = "";
-      if (ref) {
-        if (ref.mae <= 1) { maeText = "높음"; confClass = "confidence-high"; }
-        else if (ref.mae <= 2) { maeText = "보통"; confClass = "confidence-mid"; }
-        else { maeText = "낮음 (데이터 부족)"; confClass = "confidence-low"; }
-      }
+      // 1등급컷: 부트스트랩 중앙값
+      var cutline = sim.cutEstimate;
 
-      // 5개년 대비 — 원점수끼리 비교
+      // 예측 범위 (신뢰구간)
+      var ciText = sim.ciLower + " ~ " + sim.ciUpper + "점";
+
+      // 신뢰도: CI 폭 기반
+      var confText = "--";
+      var confClass = "";
+      if (sim.ciWidth <= 2) { confText = "높음"; confClass = "confidence-high"; }
+      else if (sim.ciWidth <= 5) { confText = "보통"; confClass = "confidence-mid"; }
+      else { confText = "낮음 (데이터 부족)"; confClass = "confidence-low"; }
+
+      // 5개년 대비
       var diffText = "--";
       var diffClass = "";
       if (avgRef) {
@@ -1126,41 +1244,62 @@
       html += '<tr>' +
         '<td><strong>' + subj + '</strong></td>' +
         '<td>' + n.toLocaleString() + '명</td>' +
-        '<td><strong>' + Math.round(cutline) + '점</strong></td>' +
-        '<td class="' + confClass + '">' + maeText + '</td>' +
+        '<td><strong>' + cutline + '점</strong></td>' +
+        '<td>' + ciText + '</td>' +
+        '<td class="' + confClass + '">' + confText + '</td>' +
         '<td class="' + diffClass + '">' + diffText + '</td>' +
         '</tr>';
+
+      // 편향 경고 수집
+      if (sim.bias && sim.bias.biased) {
+        hasBiasWarning = true;
+        biasWarnings.push(subj);
+      }
     }
+
+    // 편향 감지 시 경고 행
+    if (hasBiasWarning) {
+      var colSpan = 6;
+      html += '<tr class="bias-warning-row">' +
+        '<td colspan="' + colSpan + '" style="background:#fef3c7;color:#92400e;padding:0.75rem;font-size:0.85rem;text-align:left;">' +
+        '\u26A0\uFE0F 상위권 쏠림이 감지되었습니다 (' + biasWarnings.join(', ') + '). ' +
+        '제출 데이터에 고득점자가 많아 실제 등급컷과 차이가 있을 수 있습니다.' +
+        '</td></tr>';
+    }
+
     html += '</tbody></table>';
     container.innerHTML = html;
   }
 
-  // --- 종합 분석 (축약: 2줄 이내) ---
-  function renderInterpretation(grouped, avgData) {
+  // --- 종합 분석 (축약: 2줄 이내, 시뮬레이션 기반) ---
+  function renderInterpretation(grouped, avgData, simResults) {
     var container = document.getElementById("interpretation");
     var parts = [];
 
     for (var subj in grouped) {
-      var scores = grouped[subj];
-      var n = scores.length;
-      var cutline = computePercentile(scores, 96);
-      var ref = findClosestMAE(subj, n);
+      var sim = simResults[subj];
       var avgRef = avgData[subj];
 
-      var snippet = subj + " " + Math.round(cutline) + "점";
-      if (ref) {
-        snippet += "(정확도 \u00B1" + ref.mae.toFixed(1) + "점)";
-      }
+      var snippet = subj + " " + sim.cutEstimate + "점";
+      snippet += "(" + sim.ciLower + "~" + sim.ciUpper + ")";
+
       if (avgRef) {
-        var diff = cutline - avgRef.mean;
+        var avgRaw = standardToRaw(avgRef.mean, subj);
+        var diff = sim.cutEstimate - avgRaw;
         if (Math.abs(diff) >= 1) {
           snippet += diff > 0 ? " 평균 대비 높음" : " 평균 대비 낮음";
         }
       }
+
+      if (sim.bias && sim.bias.biased) {
+        snippet += " \u26A0\uFE0F쏠림 감지";
+      }
+
       parts.push(snippet);
     }
 
-    container.innerHTML = '<div class="interpretation-text compact"><p>' + parts.join(" / ") + '</p></div>';
+    container.innerHTML = '<div class="interpretation-text compact"><p>' +
+      '\uD83D\uDD0D 시뮬레이션 기반 추정: ' + parts.join(" / ") + '</p></div>';
   }
 
   // --- 히스토그램 ---
