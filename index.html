@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FirstCut - 수능 1등급컷 예측</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="header-brand">
+        <h1 class="header-logo">FirstCut</h1>
+        <span class="header-tagline">수능 1등급컷 예측 · 자기채점 1,000명이면 오차 ±1점</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Section 2: 과목별 예측 정확도 -->
+  <section id="simulation">
+    <div class="container">
+      <h2 class="section-title">몇 명의 데이터가 있으면 될까요?</h2>
+      <p class="section-desc">아래에서 과목을 선택하고, 슬라이더를 움직여 보세요.</p>
+
+      <div class="tabs tabs-scroll" id="sim-tabs">
+        <button class="tab-btn active" data-subject="국어">국어</button>
+        <button class="tab-btn" data-subject="수학">수학</button>
+        <button class="tab-btn" data-subject="물리학Ⅰ">물리학I</button>
+        <button class="tab-btn" data-subject="화학Ⅰ">화학I</button>
+        <button class="tab-btn" data-subject="생명과학Ⅰ">생명과학I</button>
+        <button class="tab-btn" data-subject="지구과학Ⅰ">지구과학I</button>
+        <button class="tab-btn" data-subject="생활과 윤리">생활과 윤리</button>
+        <button class="tab-btn" data-subject="사회·문화">사회문화</button>
+        <button class="tab-btn" data-subject="한국지리">한국지리</button>
+        <button class="tab-btn" data-subject="세계지리">세계지리</button>
+      </div>
+
+      <div class="card">
+        <div class="slider-container">
+          <div class="slider-label">
+            <span>데이터 수</span>
+            <span class="slider-value" id="slider-val">1,000명</span>
+          </div>
+          <input type="range" id="sample-slider" min="0" max="6" step="1" value="4">
+        </div>
+
+        <div class="result-box" id="sim-results">
+          <div class="result-item">
+            <div class="label">예측 오차</div>
+            <div class="value good" id="mae-val">--</div>
+          </div>
+          <div class="result-item">
+            <div class="label">업계 1위 대비</div>
+            <div class="value good" id="mega-compare">--</div>
+          </div>
+          <div class="result-item">
+            <div class="label">예측 범위 <span style="font-size:0.7rem;color:var(--text-muted);">(표준점수)</span></div>
+            <div class="value" id="ci-val" style="font-size:1.25rem;">--</div>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <canvas id="sim-chart"></canvas>
+        </div>
+        <p class="chart-source">평가원 공식 표준점수 데이터 기준</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: 실제 상황에서는? -->
+  <section id="bias">
+    <div class="container">
+      <h2 class="section-title">성적 좋은 학생이 먼저 제출하면?</h2>
+      <p class="section-desc">실제로는 성적이 높은 학생들이 자기채점을 더 많이 제출합니다.<br>이런 쏠림이 있을 때 예측이 어떻게 달라지는지 확인해보세요.</p>
+
+      <div class="card">
+        <div class="bias-grid" id="bias-grid"></div>
+        <p class="bias-note">제출 패턴 데이터를 함께 분석하면 이 오차도 크게 줄일 수 있습니다.</p>
+        <div class="chart-wrap">
+          <canvas id="bias-chart"></canvas>
+        </div>
+        <p class="chart-source">평가원 공식 표준점수 데이터 기준</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3.3: 등급별 정확도 -->
+  <section id="grade-accuracy">
+    <div class="container">
+      <h2 class="section-title">가장 중요한 상위 등급이 가장 정확합니다</h2>
+      <p class="section-desc">편향이 있는 실제 상황에서도, 관심이 높은 1~2등급의 예측이 가장 정확합니다.</p>
+
+      <div class="card">
+        <div class="grade-accuracy-grid" id="grade-accuracy-grid"></div>
+        <div class="chart-wrap">
+          <canvas id="grade-accuracy-chart"></canvas>
+        </div>
+        <p class="chart-source">평가원 공식 표준점수 데이터 기준</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3.5: 더 정확하게 -->
+  <section id="better">
+    <div class="container">
+      <h2 class="section-title">더 정확하게 만들 수 있습니다</h2>
+      <p class="section-desc">과목마다 점수 분포의 모양이 다릅니다.<br>이 모양을 파악할 수 있으면, 쏠림이 있어도 오차를 크게 줄일 수 있습니다.</p>
+
+      <div class="card">
+        <div class="better-grid">
+          <div class="better-card">
+            <div class="better-label">쏠림 없을 때</div>
+            <div class="better-value good">&plusmn;1점</div>
+            <div class="better-sub">현재 검증 완료</div>
+          </div>
+          <div class="better-card">
+            <div class="better-label">쏠림 있을 때</div>
+            <div class="better-value bad">&plusmn;3점</div>
+            <div class="better-sub">보정 없는 상태</div>
+          </div>
+          <div class="better-card better-highlight">
+            <div class="better-label">쏠림 + 자동 보정</div>
+            <div class="better-value good">&plusmn;1점대</div>
+            <div class="better-sub">실제 데이터 결합 시</div>
+          </div>
+        </div>
+
+        <div class="chart-wrap" id="dist-chart-wrap" style="margin-bottom:1.5rem;">
+          <canvas id="dist-chart"></canvas>
+        </div>
+        <p class="chart-source">2026학년도 수능 국어 영역 도수분포 기반 시뮬레이션 데이터</p>
+
+        <div class="better-explanation">
+          <p>5개년 전 과목 데이터를 분석한 결과,<br><strong>점수 분포의 특성만 파악하면 예측 정확도가 크게 올라가는 것을 확인했습니다.</strong></p>
+          <p>자기채점 서비스를 운영하시면,<br>어떤 학생이 언제 제출하는지 패턴이 자동으로 쌓이고,<br>이를 기반으로 <strong>쏠림 보정이 자동 적용</strong>됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3.7: 직접 테스트해보기 -->
+  <section id="try-it">
+    <div class="container">
+      <h2 class="section-title">직접 테스트해보기</h2>
+      <p class="section-desc">예시 데이터로 바로 체험하거나, 직접 데이터를 업로드해보세요.</p>
+
+      <div class="try-options">
+        <div class="card try-option-card">
+          <h3>예시 데이터로 체험하기</h3>
+          <p>버튼을 눌러 샘플 수에 따른 결과 차이를 직접 확인해보세요.</p>
+          <div class="sample-buttons">
+            <button class="sample-btn" data-n="50">50명</button>
+            <button class="sample-btn" data-n="200">200명</button>
+            <button class="sample-btn" data-n="1000">1,000명</button>
+            <button class="sample-btn" data-n="5000">5,000명</button>
+          </div>
+          <p class="chart-source">2026학년도 수능 국어 영역 도수분포 기반 시뮬레이션</p>
+        </div>
+
+        <div class="card try-option-card" id="upload-card">
+          <h3>내 데이터 업로드</h3>
+          <ul class="upload-guide-compact">
+            <li>✓ 첫 행에 과목명이 있으면 자동 인식</li>
+            <li>✓ 컬럼 순서 상관없음</li>
+            <li>✓ 모르는 컬럼은 자동 무시</li>
+          </ul>
+          <div class="upload-zone upload-zone-compact" id="upload-zone">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <span>엑셀 파일을 끌어다 놓거나 클릭</span>
+            <input type="file" id="file-input" accept=".xlsx,.xls,.csv" hidden>
+          </div>
+          <div class="upload-compact-info">
+            <span>🔒 데이터는 외부로 전송되지 않습니다</span>
+            <button class="template-btn-small" id="download-template">양식 다운로드</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: 유효성 검증 결과 -->
+      <div class="card validation-card" id="validation-card" style="display:none;">
+        <div id="validation-msg"></div>
+      </div>
+
+      <!-- Step 4: 분석 결과 (컴팩트) -->
+      <div id="analysis-results" style="display:none;">
+        <div class="card compact-results" id="results-capture-area">
+          <!-- 통합 요약 테이블 -->
+          <div id="results-summary-table"></div>
+
+          <!-- 종합 분석 (축약) -->
+          <div id="interpretation"></div>
+        </div>
+
+        <!-- 히스토그램 차트 (캡처 영역 밖 - 차트 렌더링 이슈 방지) -->
+        <div class="card compact-results">
+          <h3 class="results-section-title">과목별 점수 분포</h3>
+          <div class="try-tabs" id="hist-tabs"></div>
+          <div class="chart-wrap chart-wrap-compact">
+            <canvas id="hist-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- F. 결과 내보내기 -->
+        <div class="export-bar">
+          <button class="export-btn" id="save-image-btn">결과 이미지 저장</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: 비교 & 제안 -->
+  <section id="proposal">
+    <div class="container">
+      <h2 class="section-title">기존 방식과 비교하면</h2>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>업계 1위</th>
+            <th>FirstCut</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>예측 시점</td>
+            <td>수능 당일 저녁</td>
+            <td class="highlight-row">데이터가 모이는 즉시</td>
+          </tr>
+          <tr>
+            <td>예측 정확도</td>
+            <td>2~3점 오차</td>
+            <td class="highlight-row">&plusmn;1점 이내 (1,000명 기준)</td>
+          </tr>
+          <tr>
+            <td>근거</td>
+            <td>전문가 경험</td>
+            <td class="highlight-row">5개년 15회 시험 검증</td>
+          </tr>
+          <tr>
+            <td>과목</td>
+            <td>주요 과목</td>
+            <td class="highlight-row">국/수/탐 10개 과목</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="cta">
+        <p>실제 학생들의 자기채점 데이터가 쌓이는 순간,<br>쏠림 보정까지 자동 적용되어 더 정확한 예측이 가능합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>5개년 수능&middot;모의평가 15회 분석 &middot; 총 3,452건 공식 데이터 기반</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

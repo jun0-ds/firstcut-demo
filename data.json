@@ -1,0 +1,1338 @@
+{
+  "meta": {
+    "data_range": "2022~2026",
+    "n_exams": 15,
+    "total_records": 3452,
+    "mega_error_range": [
+      2,
+      3
+    ],
+    "description": "강남대성 1등급컷 예측 검증 결과",
+    "subject_averages": {
+      "국어": {
+        "mean": 130.0,
+        "std": 2.7,
+        "min": 124,
+        "max": 133,
+        "n_exams": 15
+      },
+      "수학": {
+        "mean": 132.7,
+        "std": 2.3,
+        "min": 128,
+        "max": 137,
+        "n_exams": 15
+      },
+      "물리학Ⅰ": {
+        "mean": 66.4,
+        "std": 1.8,
+        "min": 62,
+        "max": 70,
+        "n_exams": 15
+      },
+      "화학Ⅰ": {
+        "mean": 66.9,
+        "std": 1.6,
+        "min": 63,
+        "max": 69,
+        "n_exams": 15
+      },
+      "생명과학Ⅰ": {
+        "mean": 65.7,
+        "std": 0.9,
+        "min": 64,
+        "max": 67,
+        "n_exams": 15
+      },
+      "지구과학Ⅰ": {
+        "mean": 66.9,
+        "std": 1.2,
+        "min": 65,
+        "max": 69,
+        "n_exams": 15
+      },
+      "생활과 윤리": {
+        "mean": 66.0,
+        "std": 1.6,
+        "min": 64,
+        "max": 70,
+        "n_exams": 15
+      },
+      "사회·문화": {
+        "mean": 65.4,
+        "std": 1.1,
+        "min": 64,
+        "max": 69,
+        "n_exams": 15
+      },
+      "한국지리": {
+        "mean": 67.4,
+        "std": 1.7,
+        "min": 65,
+        "max": 71,
+        "n_exams": 15
+      },
+      "세계지리": {
+        "mean": 67.5,
+        "std": 1.4,
+        "min": 66,
+        "max": 70,
+        "n_exams": 15
+      }
+    }
+  },
+  "simulation": {
+    "국어": [
+      {
+        "sample_size": 50,
+        "mae": 2.641,
+        "ci_lower": 122.23,
+        "ci_upper": 134.47,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 100,
+        "mae": 1.93,
+        "ci_lower": 126.46,
+        "ci_upper": 134.68,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 200,
+        "mae": 1.497,
+        "ci_lower": 126.76,
+        "ci_upper": 133.0,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 500,
+        "mae": 1.083,
+        "ci_lower": 128.77,
+        "ci_upper": 132.63,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 1000,
+        "mae": 0.864,
+        "ci_lower": 129.18,
+        "ci_upper": 132.3,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 2000,
+        "mae": 0.847,
+        "ci_lower": 129.68,
+        "ci_upper": 132.19,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 5000,
+        "mae": 0.756,
+        "ci_lower": 130.2,
+        "ci_upper": 131.84,
+        "n_exams": 15
+      }
+    ],
+    "수학": [
+      {
+        "sample_size": 50,
+        "mae": 2.998,
+        "ci_lower": 124.06,
+        "ci_upper": 136.38,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 100,
+        "mae": 2.206,
+        "ci_lower": 128.69,
+        "ci_upper": 138.28,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 200,
+        "mae": 1.753,
+        "ci_lower": 130.53,
+        "ci_upper": 137.14,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 500,
+        "mae": 1.337,
+        "ci_lower": 131.26,
+        "ci_upper": 136.58,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 1000,
+        "mae": 1.142,
+        "ci_lower": 131.96,
+        "ci_upper": 135.42,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 2000,
+        "mae": 1.082,
+        "ci_lower": 132.57,
+        "ci_upper": 135.12,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 5000,
+        "mae": 1.011,
+        "ci_lower": 132.74,
+        "ci_upper": 134.4,
+        "n_exams": 15
+      }
+    ],
+    "물리학Ⅰ": [
+      {
+        "sample_size": 50,
+        "mae": 1.881,
+        "ci_lower": 61.93,
+        "ci_upper": 70.29,
+        "n_exams": 14
+      },
+      {
+        "sample_size": 100,
+        "mae": 1.59,
+        "ci_lower": 64.92,
+        "ci_upper": 70.79,
+        "n_exams": 14
+      },
+      {
+        "sample_size": 200,
+        "mae": 1.439,
+        "ci_lower": 65.41,
+        "ci_upper": 69.95,
+        "n_exams": 14
+      },
+      {
+        "sample_size": 500,
+        "mae": 1.353,
+        "ci_lower": 66.29,
+        "ci_upper": 69.48,
+        "n_exams": 14
+      },
+      {
+        "sample_size": 1000,
+        "mae": 1.344,
+        "ci_lower": 66.8,
+        "ci_upper": 69.0,
+        "n_exams": 14
+      },
+      {
+        "sample_size": 2000,
+        "mae": 1.314,
+        "ci_lower": 67.31,
+        "ci_upper": 69.03,
+        "n_exams": 14
+      },
+      {
+        "sample_size": 5000,
+        "mae": 1.373,
+        "ci_lower": 67.48,
+        "ci_upper": 68.59,
+        "n_exams": 14
+      }
+    ],
+    "화학Ⅰ": [
+      {
+        "sample_size": 50,
+        "mae": 1.925,
+        "ci_lower": 62.01,
+        "ci_upper": 70.44,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 100,
+        "mae": 1.549,
+        "ci_lower": 64.09,
+        "ci_upper": 70.39,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 200,
+        "mae": 1.45,
+        "ci_lower": 65.34,
+        "ci_upper": 70.12,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 500,
+        "mae": 1.323,
+        "ci_lower": 66.4,
+        "ci_upper": 69.48,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 1000,
+        "mae": 1.277,
+        "ci_lower": 67.29,
+        "ci_upper": 69.64,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 2000,
+        "mae": 1.28,
+        "ci_lower": 67.43,
+        "ci_upper": 69.16,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 5000,
+        "mae": 1.306,
+        "ci_lower": 67.76,
+        "ci_upper": 68.9,
+        "n_exams": 15
+      }
+    ],
+    "생명과학Ⅰ": [
+      {
+        "sample_size": 50,
+        "mae": 1.749,
+        "ci_lower": 62.22,
+        "ci_upper": 70.36,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 100,
+        "mae": 1.492,
+        "ci_lower": 63.18,
+        "ci_upper": 69.17,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 200,
+        "mae": 1.389,
+        "ci_lower": 64.68,
+        "ci_upper": 68.24,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 500,
+        "mae": 1.333,
+        "ci_lower": 65.16,
+        "ci_upper": 68.62,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 1000,
+        "mae": 1.311,
+        "ci_lower": 65.7,
+        "ci_upper": 68.03,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 2000,
+        "mae": 1.33,
+        "ci_lower": 65.99,
+        "ci_upper": 67.7,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 5000,
+        "mae": 1.357,
+        "ci_lower": 66.45,
+        "ci_upper": 67.53,
+        "n_exams": 15
+      }
+    ],
+    "지구과학Ⅰ": [
+      {
+        "sample_size": 50,
+        "mae": 1.901,
+        "ci_lower": 63.01,
+        "ci_upper": 70.82,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 100,
+        "mae": 1.573,
+        "ci_lower": 64.24,
+        "ci_upper": 70.08,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 200,
+        "mae": 1.429,
+        "ci_lower": 66.17,
+        "ci_upper": 70.51,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 500,
+        "mae": 1.368,
+        "ci_lower": 66.65,
+        "ci_upper": 69.59,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 1000,
+        "mae": 1.348,
+        "ci_lower": 67.05,
+        "ci_upper": 69.33,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 2000,
+        "mae": 1.308,
+        "ci_lower": 67.39,
+        "ci_upper": 69.1,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 5000,
+        "mae": 1.308,
+        "ci_lower": 67.65,
+        "ci_upper": 68.76,
+        "n_exams": 15
+      }
+    ],
+    "생활과 윤리": [
+      {
+        "sample_size": 50,
+        "mae": 1.983,
+        "ci_lower": 62.88,
+        "ci_upper": 70.68,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 100,
+        "mae": 1.826,
+        "ci_lower": 64.04,
+        "ci_upper": 69.55,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 200,
+        "mae": 1.761,
+        "ci_lower": 64.78,
+        "ci_upper": 68.93,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 500,
+        "mae": 1.631,
+        "ci_lower": 66.14,
+        "ci_upper": 68.81,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 1000,
+        "mae": 1.646,
+        "ci_lower": 66.52,
+        "ci_upper": 68.82,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 2000,
+        "mae": 1.611,
+        "ci_lower": 66.83,
+        "ci_upper": 68.37,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 5000,
+        "mae": 1.61,
+        "ci_lower": 67.05,
+        "ci_upper": 68.11,
+        "n_exams": 15
+      }
+    ],
+    "사회·문화": [
+      {
+        "sample_size": 50,
+        "mae": 1.777,
+        "ci_lower": 62.24,
+        "ci_upper": 69.25,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 100,
+        "mae": 1.619,
+        "ci_lower": 63.27,
+        "ci_upper": 68.2,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 200,
+        "mae": 1.598,
+        "ci_lower": 64.99,
+        "ci_upper": 69.59,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 500,
+        "mae": 1.566,
+        "ci_lower": 65.54,
+        "ci_upper": 68.36,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 1000,
+        "mae": 1.62,
+        "ci_lower": 65.89,
+        "ci_upper": 68.22,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 2000,
+        "mae": 1.624,
+        "ci_lower": 66.01,
+        "ci_upper": 67.67,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 5000,
+        "mae": 1.656,
+        "ci_lower": 66.54,
+        "ci_upper": 67.61,
+        "n_exams": 15
+      }
+    ],
+    "한국지리": [
+      {
+        "sample_size": 50,
+        "mae": 1.747,
+        "ci_lower": 63.84,
+        "ci_upper": 71.69,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 100,
+        "mae": 1.391,
+        "ci_lower": 64.92,
+        "ci_upper": 71.14,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 200,
+        "mae": 1.294,
+        "ci_lower": 65.89,
+        "ci_upper": 70.58,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 500,
+        "mae": 1.174,
+        "ci_lower": 66.93,
+        "ci_upper": 70.43,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 1000,
+        "mae": 1.192,
+        "ci_lower": 67.21,
+        "ci_upper": 69.85,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 2000,
+        "mae": 1.167,
+        "ci_lower": 67.65,
+        "ci_upper": 69.54,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 5000,
+        "mae": 1.142,
+        "ci_lower": 67.95,
+        "ci_upper": 69.13,
+        "n_exams": 15
+      }
+    ],
+    "세계지리": [
+      {
+        "sample_size": 50,
+        "mae": 1.924,
+        "ci_lower": 62.83,
+        "ci_upper": 72.07,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 100,
+        "mae": 1.512,
+        "ci_lower": 64.39,
+        "ci_upper": 71.04,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 200,
+        "mae": 1.408,
+        "ci_lower": 66.37,
+        "ci_upper": 70.55,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 500,
+        "mae": 1.304,
+        "ci_lower": 67.09,
+        "ci_upper": 70.32,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 1000,
+        "mae": 1.306,
+        "ci_lower": 67.78,
+        "ci_upper": 70.27,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 2000,
+        "mae": 1.321,
+        "ci_lower": 67.87,
+        "ci_upper": 69.57,
+        "n_exams": 15
+      },
+      {
+        "sample_size": 5000,
+        "mae": 1.277,
+        "ci_lower": 68.26,
+        "ci_upper": 69.51,
+        "n_exams": 15
+      }
+    ]
+  },
+  "bias_comparison": {
+    "국어": {
+      "random": [
+        {
+          "sample_size": 100,
+          "mae": 1.812
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.028
+        },
+        {
+          "sample_size": 1000,
+          "mae": 0.807
+        },
+        {
+          "sample_size": 5000,
+          "mae": 0.572
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.358
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.058
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.058
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.142
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 1.912
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.13
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.302
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.202
+        }
+      ],
+      "mixed_bias": [
+        {
+          "sample_size": 100,
+          "mae": 3.007
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.314
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.569
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.558
+        }
+      ]
+    },
+    "수학": {
+      "random": [
+        {
+          "sample_size": 100,
+          "mae": 2.203
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.262
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.158
+        },
+        {
+          "sample_size": 5000,
+          "mae": 0.859
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 3.345
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.45
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.512
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.656
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 2.194
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.712
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.567
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.542
+        }
+      ],
+      "mixed_bias": [
+        {
+          "sample_size": 100,
+          "mae": 3.644
+        },
+        {
+          "sample_size": 500,
+          "mae": 4.077
+        },
+        {
+          "sample_size": 1000,
+          "mae": 4.01
+        },
+        {
+          "sample_size": 5000,
+          "mae": 4.076
+        }
+      ]
+    },
+    "물리학Ⅰ": {
+      "random": [
+        {
+          "sample_size": 100,
+          "mae": 1.334
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.192
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.045
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.015
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.352
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.867
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.829
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.85
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 1.418
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.389
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.548
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.555
+        }
+      ],
+      "mixed_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.732
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.017
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.085
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.111
+        }
+      ]
+    },
+    "화학Ⅰ": {
+      "random": [
+        {
+          "sample_size": 100,
+          "mae": 1.887
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.672
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.701
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.661
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.737
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.943
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.132
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.182
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 1.781
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.043
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.051
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.077
+        }
+      ],
+      "mixed_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.978
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.258
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.409
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.39
+        }
+      ]
+    },
+    "생명과학Ⅰ": {
+      "random": [
+        {
+          "sample_size": 100,
+          "mae": 1.183
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.206
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.324
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.146
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.529
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.678
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.019
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.895
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 1.595
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.491
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.806
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.696
+        }
+      ],
+      "mixed_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.63
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.025
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.251
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.203
+        }
+      ]
+    },
+    "지구과학Ⅰ": {
+      "random": [
+        {
+          "sample_size": 100,
+          "mae": 1.746
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.769
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.755
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.609
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.707
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.026
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.323
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.242
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 1.863
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.938
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.354
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.07
+        }
+      ],
+      "mixed_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.842
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.31
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.532
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.446
+        }
+      ]
+    },
+    "생활과 윤리": {
+      "random": [
+        {
+          "sample_size": 100,
+          "mae": 1.839
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.582
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.573
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.607
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.623
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.081
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.235
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.209
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 1.953
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.958
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.232
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.067
+        }
+      ],
+      "mixed_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.985
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.336
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.537
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.464
+        }
+      ]
+    },
+    "사회·문화": {
+      "random": [
+        {
+          "sample_size": 100,
+          "mae": 1.531
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.195
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.232
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.282
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.6
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.916
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.062
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.023
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 1.763
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.723
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.75
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.779
+        }
+      ],
+      "mixed_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.9
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.145
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.335
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.251
+        }
+      ]
+    },
+    "한국지리": {
+      "random": [
+        {
+          "sample_size": 100,
+          "mae": 1.384
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.353
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.302
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.24
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.526
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.919
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.945
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.915
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 1.486
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.78
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.768
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.696
+        }
+      ],
+      "mixed_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.741
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.102
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.188
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.154
+        }
+      ]
+    },
+    "세계지리": {
+      "random": [
+        {
+          "sample_size": 100,
+          "mae": 1.552
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.252
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.214
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.241
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.313
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.897
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.06
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.861
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 1.453
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.729
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.735
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.648
+        }
+      ],
+      "mixed_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.589
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.112
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.199
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.106
+        }
+      ]
+    }
+  }
+}
