@@ -1269,9 +1269,9 @@
     var container = document.getElementById("results-summary-table");
     var html = '<table class="results-summary-table">';
     if (isSample) {
-      html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급컷 예측</th><th>실제 1등급컷</th><th>예측 범위</th><th>신뢰도</th></tr></thead>';
+      html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급컷 예측</th><th>실제 1등급컷</th><th>예측 범위</th><th>신뢰도</th><th>비고</th></tr></thead>';
     } else {
-      html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급컷 예측</th><th>실제 1등급컷</th><th>예측 범위</th><th>신뢰도</th></tr></thead>';
+      html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급컷 예측</th><th>실제 1등급컷</th><th>예측 범위</th><th>신뢰도</th><th>비고</th></tr></thead>';
     }
     html += '<tbody>';
 
@@ -1305,6 +1305,12 @@
         actualText = '<span style="color:var(--text-muted);font-size:0.8rem;">미공개</span>';
       }
 
+      // 비고
+      var noteText = "";
+      if (sim.bias && sim.bias.biased) {
+        noteText = '<span style="color:#d97706;">⚠️ 쏠림 감지</span>';
+      }
+
       html += '<tr>' +
         '<td><strong>' + subj + '</strong></td>' +
         '<td>' + n.toLocaleString() + '명</td>' +
@@ -1312,6 +1318,7 @@
         '<td>' + actualText + '</td>' +
         '<td>' + ciText + '</td>' +
         '<td class="' + confClass + '">' + confText + '</td>' +
+        '<td>' + noteText + '</td>' +
         '</tr>';
 
       // 편향 경고 수집
@@ -1323,7 +1330,7 @@
 
     // 편향 감지 시 경고 행
     if (hasBiasWarning) {
-      var colSpan = 6;
+      var colSpan = 7;
       html += '<tr class="bias-warning-row">' +
         '<td colspan="' + colSpan + '" style="background:#fef3c7;color:#92400e;padding:0.75rem;font-size:0.85rem;text-align:left;">' +
         '\u26A0\uFE0F 상위권 쏠림이 감지되었습니다 (' + biasWarnings.join(', ') + '). ' +
@@ -1338,24 +1345,7 @@
   // --- 종합 분석 (축약: 2줄 이내, 시뮬레이션 기반) ---
   function renderInterpretation(grouped, avgData, simResults) {
     var container = document.getElementById("interpretation");
-    var parts = [];
-
-    for (var subj in grouped) {
-      var sim = simResults[subj];
-      var avgRef = avgData[subj];
-
-      var snippet = subj + " " + sim.cutEstimate + "점";
-      snippet += "(" + sim.ciLower + "~" + sim.ciUpper + ")";
-
-      if (sim.bias && sim.bias.biased) {
-        snippet += " \u26A0\uFE0F쏠림 감지";
-      }
-
-      parts.push(snippet);
-    }
-
-    container.innerHTML = '<div class="interpretation-text compact"><p>' +
-      '\uD83D\uDD0D 시뮬레이션 기반 추정: ' + parts.join(" / ") + '</p></div>';
+    container.innerHTML = "";
   }
 
   // --- 히스토그램 ---
