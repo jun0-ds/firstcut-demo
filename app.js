@@ -1231,7 +1231,7 @@
   function renderSummaryTable(grouped, avgData, simResults) {
     var container = document.getElementById("results-summary-table");
     var html = '<table class="results-summary-table">';
-    html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급컷 예측</th><th>예측 범위</th><th>신뢰도</th><th>5개년 평균 대비</th></tr></thead>';
+    html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급컷 예측</th><th>예측 범위</th><th>신뢰도</th></tr></thead>';
     html += '<tbody>';
 
     var hasBiasWarning = false;
@@ -1256,24 +1256,12 @@
       else if (sim.ciWidth <= 5) { confText = "보통"; confClass = "confidence-mid"; }
       else { confText = "낮음 (데이터 부족)"; confClass = "confidence-low"; }
 
-      // 5개년 대비
-      var diffText = "--";
-      var diffClass = "";
-      if (avgRef) {
-        var avgRaw = standardToRaw(avgRef.mean, subj);
-        var diff = cutline - avgRaw;
-        var diffStr = diff >= 0 ? "+" + diff.toFixed(1) : diff.toFixed(1);
-        diffClass = Math.abs(diff) < 2 ? "pattern-diff-same" : diff > 0 ? "pattern-diff-up" : "pattern-diff-down";
-        diffText = diffStr + "점";
-      }
-
       html += '<tr>' +
         '<td><strong>' + subj + '</strong></td>' +
         '<td>' + n.toLocaleString() + '명</td>' +
         '<td><strong>' + cutline + '점</strong></td>' +
         '<td>' + ciText + '</td>' +
         '<td class="' + confClass + '">' + confText + '</td>' +
-        '<td class="' + diffClass + '">' + diffText + '</td>' +
         '</tr>';
 
       // 편향 경고 수집
@@ -1308,14 +1296,6 @@
 
       var snippet = subj + " " + sim.cutEstimate + "점";
       snippet += "(" + sim.ciLower + "~" + sim.ciUpper + ")";
-
-      if (avgRef) {
-        var avgRaw = standardToRaw(avgRef.mean, subj);
-        var diff = sim.cutEstimate - avgRaw;
-        if (Math.abs(diff) >= 1) {
-          snippet += diff > 0 ? " 평균 대비 높음" : " 평균 대비 낮음";
-        }
-      }
 
       if (sim.bias && sim.bias.biased) {
         snippet += " \u26A0\uFE0F쏠림 감지";
