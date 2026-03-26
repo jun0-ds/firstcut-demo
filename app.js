@@ -680,13 +680,13 @@
     // 분석 중 표시
     var valCard = document.getElementById("validation-card");
     valCard.style.display = "block";
-    document.getElementById("validation-msg").innerHTML = '<div style="text-align:center;padding:1rem;color:var(--primary);"><strong>시뮬레이션 분석 중...</strong></div>';
-    document.getElementById("analysis-results").style.display = "none";
-
-    // 데이터 수에 비례한 자연스러운 대기
     var totalScores = 0;
     for (var k in grouped) totalScores += grouped[k].length;
     var delay = Math.min(500 + totalScores * 0.4, 3000);
+    document.getElementById("validation-msg").innerHTML = '<div style="text-align:center;padding:1rem;"><strong style="color:var(--primary);">시뮬레이션 분석 중...</strong><div class="progress-bar-wrap"><div class="progress-bar-fill" id="sim-progress"></div></div></div>';
+    document.getElementById("analysis-results").style.display = "none";
+    var progBar = document.getElementById("sim-progress");
+    if (progBar) { progBar.style.transition = "width " + (delay / 1000) + "s ease"; setTimeout(function(){ progBar.style.width = "100%"; }, 50); }
 
     setTimeout(function () {
       valCard.style.display = "none";
@@ -1069,11 +1069,15 @@
     for (var k in grouped) totalScores += grouped[k].length;
     var delay = Math.min(500 + totalScores * 0.4, 3000);
 
-    showValidation(true, ["\u{1F50D} 시뮬레이션 분석 중..."]);
+    var valCard2 = document.getElementById("validation-card");
+    valCard2.style.display = "block";
+    document.getElementById("validation-msg").innerHTML = '<div style="text-align:center;padding:1rem;"><strong style="color:var(--primary);">시뮬레이션 분석 중...</strong><div class="progress-bar-wrap"><div class="progress-bar-fill" id="sim-progress2"></div></div></div>';
     document.getElementById("analysis-results").style.display = "none";
+    var progBar2 = document.getElementById("sim-progress2");
+    if (progBar2) { progBar2.style.transition = "width " + (delay / 1000) + "s ease"; setTimeout(function(){ progBar2.style.width = "100%"; }, 50); }
 
     setTimeout(function () {
-      document.getElementById("validation-card").style.display = "none";
+      valCard2.style.display = "none";
       showResults(grouped);
     }, delay);
   }
