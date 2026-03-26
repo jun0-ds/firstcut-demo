@@ -51,23 +51,32 @@
     { grade: "5등급", korean: 9.53, math: 12.53, colorClass: "grade-red" },
   ];
 
-  // 2026 수능 국어 기준 표준→원 근사 변환
-  function standardToRaw(stdScore) {
-    // 국어 매핑 포인트: (표준, 원)
-    const mapping = [
+  // 2026 수능 표준→원 근사 변환 (과목별)
+  var STD_TO_RAW_MAPPINGS = {
+    "국어": [
       [147, 100], [133, 91], [126, 85], [117, 77],
       [107, 67], [94, 56], [83, 46], [73, 37], [66, 31]
-    ];
+    ],
+    "수학": [
+      [139, 100], [133, 96], [127, 88], [121, 80],
+      [112, 68], [100, 56], [88, 44], [78, 35], [68, 27]
+    ]
+  };
+  // 탐구 과목은 표준점수를 그대로 사용 (별도 매핑 없음)
+
+  function standardToRaw(stdScore, subject) {
+    var mapping = STD_TO_RAW_MAPPINGS[subject];
+    if (!mapping) return stdScore; // 탐구 등 매핑 없으면 표준점수 그대로
     // 선형보간
-    for (let i = 0; i < mapping.length - 1; i++) {
-      const [s1, r1] = mapping[i];
-      const [s2, r2] = mapping[i + 1];
+    for (var i = 0; i < mapping.length - 1; i++) {
+      var s1 = mapping[i][0], r1 = mapping[i][1];
+      var s2 = mapping[i + 1][0], r2 = mapping[i + 1][1];
       if (stdScore >= s2 && stdScore <= s1) {
-        const ratio = (stdScore - s2) / (s1 - s2);
+        var ratio = (stdScore - s2) / (s1 - s2);
         return Math.round(r2 + ratio * (r1 - r2));
       }
     }
-    if (stdScore > mapping[0][0]) return 100;
+    if (stdScore > mapping[0][0]) return mapping[0][1];
     return mapping[mapping.length - 1][1];
   }
 
@@ -609,10 +618,10 @@
     });
   }
 
-  function buildPopulationArray() {
-    // dist_data.json의 국어 데이터로 모집단 배열 생성
-    if (!DIST_DATA || !DIST_DATA["국어"]) return null;
-    var raw = DIST_DATA["국어"];
+  function buildPopulationArray(subject) {
+    // dist_data.json의 해당 과목 데이터로 모집단 배열 생성
+    if (!DIST_DATA || !DIST_DATA[subject]) return null;
+    var raw = DIST_DATA[subject];
     var population = [];
     for (var i = 0; i < raw.scores.length; i++) {
       for (var j = 0; j < raw.counts[i]; j++) {
@@ -637,20 +646,33 @@
     return result;
   }
 
+  // 예시 데이터 10과목 목록
+  var SAMPLE_SUBJECTS = [
+    "국어", "수학",
+    "물리학Ⅰ", "화학Ⅰ", "생명과학Ⅰ", "지구과학Ⅰ",
+    "생활과 윤리", "사회·문화", "한국지리", "세계지리"
+  ];
+
   function runSampleAnalysis(n) {
-    var population = buildPopulationArray();
-    if (!population) {
-      console.error("dist_data.json 국어 데이터 없음");
+    var grouped = {};
+    var missing = [];
+
+    SAMPLE_SUBJECTS.forEach(function (subject) {
+      var population = buildPopulationArray(subject);
+      if (!population) {
+        missing.push(subject);
+        return;
+      }
+      var sampleStd = sampleFromPopulation(population, n);
+      // 표준점수 → 원점수 변환 (국어/수학만 변환, 탐구는 그대로)
+      var sample = sampleStd.map(function (s) { return standardToRaw(s, subject); });
+      grouped[subject] = sample;
+    });
+
+    if (Object.keys(grouped).length === 0) {
+      console.error("dist_data.json 데이터 없음", missing);
       return;
     }
-
-    var sampleStd = sampleFromPopulation(population, n);
-
-    // 표준점수 → 원점수 변환
-    var sample = sampleStd.map(function (s) { return standardToRaw(s); });
-
-    // wide 형태로 변환 (국어 컬럼만 있는 가상 데이터)
-    var grouped = { "국어": sample };
 
     // 기존 분석 파이프라인에 전달
     parsedData = grouped;
@@ -1142,7 +1164,7 @@
     var popSum = 0;
     var popScoresRaw = []; // 원점수 변환된 모집단
     for (var i = 0; i < raw.scores.length; i++) {
-      var rawScore = standardToRaw(raw.scores[i]);
+      var rawScore = standardToRaw(raw.scores[i], subject);
       popTotal += raw.counts[i];
       popSum += rawScore * raw.counts[i];
       for (var j = 0; j < raw.counts[i]; j++) {
@@ -1196,7 +1218,7 @@
       // 부트스트랩 기반 1등급컷 추정 + 신뢰구간
       var ci = bootstrapCI(scores, 96, 300, 0.95);
 
-      // 편향 감지 (국어/수학만 — dist_data.json에 있는 과목)
+      // 편향 감지 (dist_data.json에 있는 과목)
       var bias = detectBias(scores, subj);
 
       results[subj] = {
