@@ -655,11 +655,21 @@
     // 기존 분석 파이프라인에 전달
     parsedData = grouped;
 
-    // validation 메시지 숨김 (바로 결과 표시)
-    document.getElementById("validation-card").style.display = "none";
+    // 분석 중 표시
+    var valCard = document.getElementById("validation-card");
+    valCard.style.display = "block";
+    document.getElementById("validation-msg").innerHTML = '<div style="text-align:center;padding:1rem;color:var(--primary);"><strong>시뮬레이션 분석 중...</strong></div>';
+    document.getElementById("analysis-results").style.display = "none";
 
-    // 결과 표시 (업로드 카드는 축소하지 않음)
-    showResults(grouped);
+    // 데이터 수에 비례한 자연스러운 대기
+    var totalScores = 0;
+    for (var k in grouped) totalScores += grouped[k].length;
+    var delay = Math.min(500 + totalScores * 0.4, 3000);
+
+    setTimeout(function () {
+      valCard.style.display = "none";
+      showResults(grouped);
+    }, delay);
   }
 
   // =====================
@@ -717,10 +727,14 @@
       });
     }
 
-    // 드래그앤드롭
-    uploadZone.addEventListener("click", function () {
-      fileInput.click();
-    });
+    // 드래그앤드롭 (이벤트 중복 방지)
+    if (!uploadZone._clickBound) {
+      uploadZone.addEventListener("click", function (e) {
+        e.stopPropagation();
+        fileInput.click();
+      });
+      uploadZone._clickBound = true;
+    }
 
     uploadZone.addEventListener("dragover", function (e) {
       e.preventDefault();
@@ -1027,7 +1041,19 @@
     }
 
     parsedData = grouped;
-    showResults(grouped);
+
+    // 분석 중 표시 + 데이터 수 비례 대기
+    var totalScores = 0;
+    for (var k in grouped) totalScores += grouped[k].length;
+    var delay = Math.min(500 + totalScores * 0.4, 3000);
+
+    showValidation(true, ["\u{1F50D} 시뮬레이션 분석 중..."]);
+    document.getElementById("analysis-results").style.display = "none";
+
+    setTimeout(function () {
+      document.getElementById("validation-card").style.display = "none";
+      showResults(grouped);
+    }, delay);
   }
 
   function showValidation(success, messages) {
@@ -1436,7 +1462,6 @@
   // --- Boot ---
   document.addEventListener("DOMContentLoaded", function () {
     init().then(function () {
-      setupTryIt();
       setupSampleButtons();
       // 기본값: 1000명 예시 데이터 자동 로딩
       runSampleAnalysis(1000);
@@ -1444,6 +1469,8 @@
       document.querySelectorAll(".sample-btn").forEach(function (b) {
         if (b.dataset.n === "1000") b.classList.add("active");
       });
+      // 업로드 관련은 마지막에 (file chooser 트리거 방지)
+      setupTryIt();
     });
   });
 })();
