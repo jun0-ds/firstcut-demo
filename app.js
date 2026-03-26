@@ -654,6 +654,7 @@
   ];
 
   function runSampleAnalysis(n) {
+    _isSampleMode = true;
     var grouped = {};
     var missing = [];
 
@@ -850,6 +851,7 @@
   }
 
   function handleFile(file) {
+    _isSampleMode = false;
     var reader = new FileReader();
     reader.onload = function (e) {
       try {
@@ -1102,6 +1104,8 @@
     }
   }
 
+  var _isSampleMode = false;
+
   function showResults(grouped) {
     // 업로드 카드는 축소하지 않음 (항상 보임)
     document.getElementById("analysis-results").style.display = "block";
@@ -1112,7 +1116,7 @@
     var simResults = runSimulationEngine(grouped);
 
     // 통합 요약 테이블 (시뮬레이션 결과 전달)
-    renderSummaryTable(grouped, avgData, simResults);
+    renderSummaryTable(grouped, avgData, simResults, _isSampleMode);
 
     // 종합 분석 (축약, 시뮬레이션 결과 사용)
     renderInterpretation(grouped, avgData, simResults);
@@ -1254,10 +1258,21 @@
     return closest;
   }
 
-  function renderSummaryTable(grouped, avgData, simResults) {
+  // 2026 수능 실제 1등급컷 (원점수 기준)
+  var ACTUAL_CUTLINES = {
+    "국어": 91, "수학": 88, "물리학Ⅰ": 47, "화학Ⅰ": 45,
+    "생명과학Ⅰ": 43, "지구과학Ⅰ": 44, "생활과 윤리": 44,
+    "사회·문화": 43, "한국지리": 46, "세계지리": 46
+  };
+
+  function renderSummaryTable(grouped, avgData, simResults, isSample) {
     var container = document.getElementById("results-summary-table");
     var html = '<table class="results-summary-table">';
-    html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급컷 예측</th><th>예측 범위</th><th>신뢰도</th></tr></thead>';
+    if (isSample) {
+      html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급컷 예측</th><th>실제 1등급컷</th><th>예측 범위</th><th>신뢰도</th></tr></thead>';
+    } else {
+      html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급컷 예측</th><th>실제 1등급컷</th><th>예측 범위</th><th>신뢰도</th></tr></thead>';
+    }
     html += '<tbody>';
 
     var hasBiasWarning = false;
@@ -1282,10 +1297,19 @@
       else if (sim.ciWidth <= 5) { confText = "보통"; confClass = "confidence-mid"; }
       else { confText = "낮음 (데이터 부족)"; confClass = "confidence-low"; }
 
+      // 실제 1등급컷
+      var actualText = "-";
+      if (isSample && ACTUAL_CUTLINES[subj] !== undefined) {
+        actualText = ACTUAL_CUTLINES[subj] + "점";
+      } else if (!isSample) {
+        actualText = '<span style="color:var(--text-muted);font-size:0.8rem;">미공개</span>';
+      }
+
       html += '<tr>' +
         '<td><strong>' + subj + '</strong></td>' +
         '<td>' + n.toLocaleString() + '명</td>' +
         '<td><strong>' + cutline + '점</strong></td>' +
+        '<td>' + actualText + '</td>' +
         '<td>' + ciText + '</td>' +
         '<td class="' + confClass + '">' + confText + '</td>' +
         '</tr>';
