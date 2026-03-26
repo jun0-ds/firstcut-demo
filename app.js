@@ -1395,20 +1395,35 @@
     // 등급컷 라인 위치
     var cutline = computePercentile(scores, 96);
 
+    // 1등급컷 세로선 위치 (label 인덱스)
+    var cutlineIdx = 0;
+    for (var ci = 0; ci < labels.length; ci++) {
+      if (labels[ci] >= cutline) { cutlineIdx = ci; break; }
+      cutlineIdx = ci;
+    }
+
     var datasets = [{
       label: "인원 수",
       data: bins,
-      backgroundColor: bins.map(function (_, i) {
-        var binStart = min + i * binSize;
-        return binStart >= cutline ? "rgba(22, 163, 74, 0.5)" : "rgba(59, 130, 246, 0.4)";
-      }),
-      borderColor: bins.map(function (_, i) {
-        var binStart = min + i * binSize;
-        return binStart >= cutline ? "#16a34a" : "#3b82f6";
-      }),
+      backgroundColor: "rgba(59, 130, 246, 0.4)",
+      borderColor: "#3b82f6",
       borderWidth: 1,
       borderRadius: 2,
     }];
+
+    // 1등급컷 세로선을 annotation 대신 별도 데이터셋으로
+    var cutlineData = new Array(bins.length).fill(null);
+    cutlineData[cutlineIdx] = Math.max.apply(null, bins) * 1.1;
+    datasets.push({
+      label: "1등급컷 (" + Math.round(cutline) + "점)",
+      data: cutlineData,
+      type: "bar",
+      backgroundColor: "rgba(239, 68, 68, 0.7)",
+      borderColor: "#ef4444",
+      borderWidth: 0,
+      barPercentage: 0.15,
+      categoryPercentage: 1,
+    });
 
     histChart = new Chart(ctx, {
       type: "bar",
