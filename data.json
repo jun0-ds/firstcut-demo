@@ -85,510 +85,510 @@
     "국어": [
       {
         "sample_size": 50,
-        "mae": 2.641,
-        "ci_lower": 122.23,
-        "ci_upper": 134.47,
+        "mae": 3.023,
+        "ci_lower": 121.73,
+        "ci_upper": 133.5,
         "n_exams": 15
       },
       {
         "sample_size": 100,
-        "mae": 1.93,
-        "ci_lower": 126.46,
-        "ci_upper": 134.68,
+        "mae": 2.356,
+        "ci_lower": 126.04,
+        "ci_upper": 133.85,
         "n_exams": 15
       },
       {
         "sample_size": 200,
-        "mae": 1.497,
-        "ci_lower": 126.76,
-        "ci_upper": 133.0,
+        "mae": 1.953,
+        "ci_lower": 126.17,
+        "ci_upper": 132.39,
         "n_exams": 15
       },
       {
         "sample_size": 500,
-        "mae": 1.083,
-        "ci_lower": 128.77,
-        "ci_upper": 132.63,
+        "mae": 1.566,
+        "ci_lower": 127.91,
+        "ci_upper": 132.44,
         "n_exams": 15
       },
       {
         "sample_size": 1000,
-        "mae": 0.864,
-        "ci_lower": 129.18,
-        "ci_upper": 132.3,
+        "mae": 1.347,
+        "ci_lower": 128.23,
+        "ci_upper": 132.2,
         "n_exams": 15
       },
       {
         "sample_size": 2000,
-        "mae": 0.847,
-        "ci_lower": 129.68,
-        "ci_upper": 132.19,
+        "mae": 1.253,
+        "ci_lower": 128.95,
+        "ci_upper": 132.18,
         "n_exams": 15
       },
       {
         "sample_size": 5000,
-        "mae": 0.756,
-        "ci_lower": 130.2,
-        "ci_upper": 131.84,
+        "mae": 1.114,
+        "ci_lower": 129.61,
+        "ci_upper": 131.93,
         "n_exams": 15
       }
     ],
     "수학": [
       {
         "sample_size": 50,
-        "mae": 2.998,
-        "ci_lower": 124.06,
-        "ci_upper": 136.38,
+        "mae": 3.374,
+        "ci_lower": 123.78,
+        "ci_upper": 135.44,
         "n_exams": 15
       },
       {
         "sample_size": 100,
-        "mae": 2.206,
-        "ci_lower": 128.69,
-        "ci_upper": 138.28,
+        "mae": 2.636,
+        "ci_lower": 127.49,
+        "ci_upper": 137.19,
         "n_exams": 15
       },
       {
         "sample_size": 200,
-        "mae": 1.753,
-        "ci_lower": 130.53,
-        "ci_upper": 137.14,
+        "mae": 2.23,
+        "ci_lower": 129.6,
+        "ci_upper": 136.33,
         "n_exams": 15
       },
       {
         "sample_size": 500,
-        "mae": 1.337,
-        "ci_lower": 131.26,
-        "ci_upper": 136.58,
+        "mae": 1.815,
+        "ci_lower": 130.53,
+        "ci_upper": 136.16,
         "n_exams": 15
       },
       {
         "sample_size": 1000,
-        "mae": 1.142,
-        "ci_lower": 131.96,
-        "ci_upper": 135.42,
+        "mae": 1.616,
+        "ci_lower": 131.07,
+        "ci_upper": 135.39,
         "n_exams": 15
       },
       {
         "sample_size": 2000,
-        "mae": 1.082,
-        "ci_lower": 132.57,
-        "ci_upper": 135.12,
+        "mae": 1.484,
+        "ci_lower": 131.85,
+        "ci_upper": 135.17,
         "n_exams": 15
       },
       {
         "sample_size": 5000,
-        "mae": 1.011,
-        "ci_lower": 132.74,
-        "ci_upper": 134.4,
+        "mae": 1.334,
+        "ci_lower": 132.12,
+        "ci_upper": 134.6,
         "n_exams": 15
       }
     ],
     "물리학Ⅰ": [
       {
         "sample_size": 50,
-        "mae": 1.881,
-        "ci_lower": 61.93,
-        "ci_upper": 70.29,
+        "mae": 2.097,
+        "ci_lower": 61.44,
+        "ci_upper": 69.45,
         "n_exams": 14
       },
       {
         "sample_size": 100,
-        "mae": 1.59,
-        "ci_lower": 64.92,
-        "ci_upper": 70.79,
+        "mae": 1.791,
+        "ci_lower": 64.38,
+        "ci_upper": 69.84,
         "n_exams": 14
       },
       {
         "sample_size": 200,
-        "mae": 1.439,
-        "ci_lower": 65.41,
-        "ci_upper": 69.95,
+        "mae": 1.643,
+        "ci_lower": 64.71,
+        "ci_upper": 69.4,
         "n_exams": 14
       },
       {
         "sample_size": 500,
-        "mae": 1.353,
-        "ci_lower": 66.29,
-        "ci_upper": 69.48,
+        "mae": 1.503,
+        "ci_lower": 65.58,
+        "ci_upper": 69.08,
         "n_exams": 14
       },
       {
         "sample_size": 1000,
-        "mae": 1.344,
-        "ci_lower": 66.8,
-        "ci_upper": 69.0,
+        "mae": 1.447,
+        "ci_lower": 66.33,
+        "ci_upper": 68.67,
         "n_exams": 14
       },
       {
         "sample_size": 2000,
-        "mae": 1.314,
-        "ci_lower": 67.31,
-        "ci_upper": 69.03,
+        "mae": 1.392,
+        "ci_lower": 67.02,
+        "ci_upper": 68.8,
         "n_exams": 14
       },
       {
         "sample_size": 5000,
-        "mae": 1.373,
-        "ci_lower": 67.48,
-        "ci_upper": 68.59,
+        "mae": 1.419,
+        "ci_lower": 67.32,
+        "ci_upper": 68.51,
         "n_exams": 14
       }
     ],
     "화학Ⅰ": [
       {
         "sample_size": 50,
-        "mae": 1.925,
-        "ci_lower": 62.01,
-        "ci_upper": 70.44,
+        "mae": 2.16,
+        "ci_lower": 61.46,
+        "ci_upper": 69.7,
         "n_exams": 15
       },
       {
         "sample_size": 100,
-        "mae": 1.549,
-        "ci_lower": 64.09,
-        "ci_upper": 70.39,
+        "mae": 1.793,
+        "ci_lower": 63.71,
+        "ci_upper": 69.72,
         "n_exams": 15
       },
       {
         "sample_size": 200,
-        "mae": 1.45,
-        "ci_lower": 65.34,
-        "ci_upper": 70.12,
+        "mae": 1.667,
+        "ci_lower": 64.76,
+        "ci_upper": 69.44,
         "n_exams": 15
       },
       {
         "sample_size": 500,
-        "mae": 1.323,
-        "ci_lower": 66.4,
-        "ci_upper": 69.48,
+        "mae": 1.501,
+        "ci_lower": 65.77,
+        "ci_upper": 69.14,
         "n_exams": 15
       },
       {
         "sample_size": 1000,
-        "mae": 1.277,
-        "ci_lower": 67.29,
-        "ci_upper": 69.64,
+        "mae": 1.416,
+        "ci_lower": 66.74,
+        "ci_upper": 69.25,
         "n_exams": 15
       },
       {
         "sample_size": 2000,
-        "mae": 1.28,
-        "ci_lower": 67.43,
-        "ci_upper": 69.16,
+        "mae": 1.389,
+        "ci_lower": 67.04,
+        "ci_upper": 68.93,
         "n_exams": 15
       },
       {
         "sample_size": 5000,
-        "mae": 1.306,
-        "ci_lower": 67.76,
-        "ci_upper": 68.9,
+        "mae": 1.366,
+        "ci_lower": 67.51,
+        "ci_upper": 68.77,
         "n_exams": 15
       }
     ],
     "생명과학Ⅰ": [
       {
         "sample_size": 50,
-        "mae": 1.749,
-        "ci_lower": 62.22,
-        "ci_upper": 70.36,
+        "mae": 1.979,
+        "ci_lower": 61.79,
+        "ci_upper": 69.39,
         "n_exams": 15
       },
       {
         "sample_size": 100,
-        "mae": 1.492,
-        "ci_lower": 63.18,
-        "ci_upper": 69.17,
+        "mae": 1.716,
+        "ci_lower": 62.57,
+        "ci_upper": 68.41,
         "n_exams": 15
       },
       {
         "sample_size": 200,
-        "mae": 1.389,
-        "ci_lower": 64.68,
-        "ci_upper": 68.24,
+        "mae": 1.589,
+        "ci_lower": 63.99,
+        "ci_upper": 67.76,
         "n_exams": 15
       },
       {
         "sample_size": 500,
-        "mae": 1.333,
-        "ci_lower": 65.16,
-        "ci_upper": 68.62,
+        "mae": 1.468,
+        "ci_lower": 64.44,
+        "ci_upper": 68.12,
         "n_exams": 15
       },
       {
         "sample_size": 1000,
-        "mae": 1.311,
-        "ci_lower": 65.7,
-        "ci_upper": 68.03,
+        "mae": 1.412,
+        "ci_lower": 65.16,
+        "ci_upper": 67.76,
         "n_exams": 15
       },
       {
         "sample_size": 2000,
-        "mae": 1.33,
-        "ci_lower": 65.99,
-        "ci_upper": 67.7,
+        "mae": 1.417,
+        "ci_lower": 65.68,
+        "ci_upper": 67.54,
         "n_exams": 15
       },
       {
         "sample_size": 5000,
-        "mae": 1.357,
-        "ci_lower": 66.45,
-        "ci_upper": 67.53,
+        "mae": 1.404,
+        "ci_lower": 66.16,
+        "ci_upper": 67.43,
         "n_exams": 15
       }
     ],
     "지구과학Ⅰ": [
       {
         "sample_size": 50,
-        "mae": 1.901,
-        "ci_lower": 63.01,
-        "ci_upper": 70.82,
+        "mae": 2.115,
+        "ci_lower": 62.8,
+        "ci_upper": 69.89,
         "n_exams": 15
       },
       {
         "sample_size": 100,
-        "mae": 1.573,
-        "ci_lower": 64.24,
-        "ci_upper": 70.08,
+        "mae": 1.802,
+        "ci_lower": 63.91,
+        "ci_upper": 69.51,
         "n_exams": 15
       },
       {
         "sample_size": 200,
-        "mae": 1.429,
-        "ci_lower": 66.17,
-        "ci_upper": 70.51,
+        "mae": 1.658,
+        "ci_lower": 65.61,
+        "ci_upper": 69.69,
         "n_exams": 15
       },
       {
         "sample_size": 500,
-        "mae": 1.368,
-        "ci_lower": 66.65,
-        "ci_upper": 69.59,
+        "mae": 1.544,
+        "ci_lower": 66.02,
+        "ci_upper": 69.38,
         "n_exams": 15
       },
       {
         "sample_size": 1000,
-        "mae": 1.348,
-        "ci_lower": 67.05,
-        "ci_upper": 69.33,
+        "mae": 1.487,
+        "ci_lower": 66.51,
+        "ci_upper": 68.99,
         "n_exams": 15
       },
       {
         "sample_size": 2000,
-        "mae": 1.308,
-        "ci_lower": 67.39,
-        "ci_upper": 69.1,
+        "mae": 1.434,
+        "ci_lower": 67.18,
+        "ci_upper": 68.94,
         "n_exams": 15
       },
       {
         "sample_size": 5000,
-        "mae": 1.308,
-        "ci_lower": 67.65,
-        "ci_upper": 68.76,
+        "mae": 1.374,
+        "ci_lower": 67.17,
+        "ci_upper": 68.69,
         "n_exams": 15
       }
     ],
     "생활과 윤리": [
       {
         "sample_size": 50,
-        "mae": 1.983,
-        "ci_lower": 62.88,
-        "ci_upper": 70.68,
+        "mae": 2.09,
+        "ci_lower": 61.9,
+        "ci_upper": 69.7,
         "n_exams": 15
       },
       {
         "sample_size": 100,
-        "mae": 1.826,
-        "ci_lower": 64.04,
-        "ci_upper": 69.55,
+        "mae": 1.944,
+        "ci_lower": 63.43,
+        "ci_upper": 68.77,
         "n_exams": 15
       },
       {
         "sample_size": 200,
-        "mae": 1.761,
-        "ci_lower": 64.78,
-        "ci_upper": 68.93,
+        "mae": 1.835,
+        "ci_lower": 64.19,
+        "ci_upper": 68.18,
         "n_exams": 15
       },
       {
         "sample_size": 500,
-        "mae": 1.631,
-        "ci_lower": 66.14,
-        "ci_upper": 68.81,
+        "mae": 1.697,
+        "ci_lower": 65.48,
+        "ci_upper": 68.34,
         "n_exams": 15
       },
       {
         "sample_size": 1000,
-        "mae": 1.646,
-        "ci_lower": 66.52,
-        "ci_upper": 68.82,
+        "mae": 1.668,
+        "ci_lower": 66.04,
+        "ci_upper": 68.4,
         "n_exams": 15
       },
       {
         "sample_size": 2000,
-        "mae": 1.611,
-        "ci_lower": 66.83,
-        "ci_upper": 68.37,
+        "mae": 1.613,
+        "ci_lower": 66.22,
+        "ci_upper": 68.07,
         "n_exams": 15
       },
       {
         "sample_size": 5000,
-        "mae": 1.61,
-        "ci_lower": 67.05,
-        "ci_upper": 68.11,
+        "mae": 1.553,
+        "ci_lower": 66.52,
+        "ci_upper": 67.9,
         "n_exams": 15
       }
     ],
     "사회·문화": [
       {
         "sample_size": 50,
-        "mae": 1.777,
-        "ci_lower": 62.24,
-        "ci_upper": 69.25,
+        "mae": 1.934,
+        "ci_lower": 62.2,
+        "ci_upper": 68.6,
         "n_exams": 15
       },
       {
         "sample_size": 100,
-        "mae": 1.619,
-        "ci_lower": 63.27,
-        "ci_upper": 68.2,
+        "mae": 1.718,
+        "ci_lower": 63.19,
+        "ci_upper": 67.9,
         "n_exams": 15
       },
       {
         "sample_size": 200,
-        "mae": 1.598,
-        "ci_lower": 64.99,
-        "ci_upper": 69.59,
+        "mae": 1.648,
+        "ci_lower": 64.12,
+        "ci_upper": 68.21,
         "n_exams": 15
       },
       {
         "sample_size": 500,
-        "mae": 1.566,
-        "ci_lower": 65.54,
-        "ci_upper": 68.36,
+        "mae": 1.597,
+        "ci_lower": 64.94,
+        "ci_upper": 67.86,
         "n_exams": 15
       },
       {
         "sample_size": 1000,
-        "mae": 1.62,
-        "ci_lower": 65.89,
-        "ci_upper": 68.22,
+        "mae": 1.609,
+        "ci_lower": 65.55,
+        "ci_upper": 67.75,
         "n_exams": 15
       },
       {
         "sample_size": 2000,
-        "mae": 1.624,
-        "ci_lower": 66.01,
-        "ci_upper": 67.67,
+        "mae": 1.61,
+        "ci_lower": 65.9,
+        "ci_upper": 67.45,
         "n_exams": 15
       },
       {
         "sample_size": 5000,
-        "mae": 1.656,
-        "ci_lower": 66.54,
-        "ci_upper": 67.61,
+        "mae": 1.622,
+        "ci_lower": 66.53,
+        "ci_upper": 67.43,
         "n_exams": 15
       }
     ],
     "한국지리": [
       {
         "sample_size": 50,
-        "mae": 1.747,
-        "ci_lower": 63.84,
-        "ci_upper": 71.69,
+        "mae": 2.036,
+        "ci_lower": 63.39,
+        "ci_upper": 70.81,
         "n_exams": 15
       },
       {
         "sample_size": 100,
-        "mae": 1.391,
-        "ci_lower": 64.92,
-        "ci_upper": 71.14,
+        "mae": 1.723,
+        "ci_lower": 64.41,
+        "ci_upper": 70.44,
         "n_exams": 15
       },
       {
         "sample_size": 200,
-        "mae": 1.294,
-        "ci_lower": 65.89,
-        "ci_upper": 70.58,
+        "mae": 1.566,
+        "ci_lower": 65.47,
+        "ci_upper": 70.1,
         "n_exams": 15
       },
       {
         "sample_size": 500,
-        "mae": 1.174,
-        "ci_lower": 66.93,
-        "ci_upper": 70.43,
+        "mae": 1.386,
+        "ci_lower": 66.28,
+        "ci_upper": 69.9,
         "n_exams": 15
       },
       {
         "sample_size": 1000,
-        "mae": 1.192,
-        "ci_lower": 67.21,
-        "ci_upper": 69.85,
-        "n_exams": 15
-      },
-      {
-        "sample_size": 2000,
-        "mae": 1.167,
-        "ci_lower": 67.65,
+        "mae": 1.346,
+        "ci_lower": 66.63,
         "ci_upper": 69.54,
         "n_exams": 15
       },
       {
+        "sample_size": 2000,
+        "mae": 1.295,
+        "ci_lower": 67.27,
+        "ci_upper": 69.41,
+        "n_exams": 15
+      },
+      {
         "sample_size": 5000,
-        "mae": 1.142,
-        "ci_lower": 67.95,
-        "ci_upper": 69.13,
+        "mae": 1.248,
+        "ci_lower": 67.69,
+        "ci_upper": 69.11,
         "n_exams": 15
       }
     ],
     "세계지리": [
       {
         "sample_size": 50,
-        "mae": 1.924,
-        "ci_lower": 62.83,
-        "ci_upper": 72.07,
+        "mae": 2.156,
+        "ci_lower": 62.35,
+        "ci_upper": 71.16,
         "n_exams": 15
       },
       {
         "sample_size": 100,
-        "mae": 1.512,
-        "ci_lower": 64.39,
-        "ci_upper": 71.04,
+        "mae": 1.756,
+        "ci_lower": 63.9,
+        "ci_upper": 70.36,
         "n_exams": 15
       },
       {
         "sample_size": 200,
-        "mae": 1.408,
-        "ci_lower": 66.37,
-        "ci_upper": 70.55,
+        "mae": 1.626,
+        "ci_lower": 65.73,
+        "ci_upper": 69.92,
         "n_exams": 15
       },
       {
         "sample_size": 500,
-        "mae": 1.304,
-        "ci_lower": 67.09,
-        "ci_upper": 70.32,
+        "mae": 1.467,
+        "ci_lower": 66.32,
+        "ci_upper": 69.9,
         "n_exams": 15
       },
       {
         "sample_size": 1000,
-        "mae": 1.306,
-        "ci_lower": 67.78,
-        "ci_upper": 70.27,
+        "mae": 1.434,
+        "ci_lower": 67.36,
+        "ci_upper": 69.87,
         "n_exams": 15
       },
       {
         "sample_size": 2000,
-        "mae": 1.321,
-        "ci_lower": 67.87,
-        "ci_upper": 69.57,
+        "mae": 1.405,
+        "ci_lower": 67.51,
+        "ci_upper": 69.41,
         "n_exams": 15
       },
       {
         "sample_size": 5000,
-        "mae": 1.277,
-        "ci_lower": 68.26,
-        "ci_upper": 69.51,
+        "mae": 1.334,
+        "ci_lower": 68.03,
+        "ci_upper": 69.38,
         "n_exams": 15
       }
     ]
@@ -598,73 +598,73 @@
       "random": [
         {
           "sample_size": 100,
-          "mae": 1.812
+          "mae": 2.277
         },
         {
           "sample_size": 500,
-          "mae": 1.028
+          "mae": 1.696
         },
         {
           "sample_size": 1000,
-          "mae": 0.807
+          "mae": 1.381
         },
         {
           "sample_size": 5000,
-          "mae": 0.572
+          "mae": 0.999
         }
       ],
       "upper_bias": [
         {
           "sample_size": 100,
-          "mae": 2.358
+          "mae": 2.355
         },
         {
           "sample_size": 500,
-          "mae": 3.058
+          "mae": 2.801
         },
         {
           "sample_size": 1000,
-          "mae": 3.058
+          "mae": 2.814
         },
         {
           "sample_size": 5000,
-          "mae": 3.142
+          "mae": 2.879
         }
       ],
       "lower_dropout": [
         {
           "sample_size": 100,
-          "mae": 1.912
+          "mae": 2.301
         },
         {
           "sample_size": 500,
-          "mae": 1.13
+          "mae": 1.612
         },
         {
           "sample_size": 1000,
-          "mae": 1.302
+          "mae": 1.62
         },
         {
           "sample_size": 5000,
-          "mae": 1.202
+          "mae": 1.434
         }
       ],
       "mixed_bias": [
         {
           "sample_size": 100,
-          "mae": 3.007
+          "mae": 2.81
         },
         {
           "sample_size": 500,
-          "mae": 3.314
+          "mae": 2.975
         },
         {
           "sample_size": 1000,
-          "mae": 3.569
+          "mae": 3.148
         },
         {
           "sample_size": 5000,
-          "mae": 3.558
+          "mae": 3.145
         }
       ]
     },
@@ -672,73 +672,73 @@
       "random": [
         {
           "sample_size": 100,
-          "mae": 2.203
+          "mae": 2.712
         },
         {
           "sample_size": 500,
-          "mae": 1.262
+          "mae": 1.791
         },
         {
           "sample_size": 1000,
-          "mae": 1.158
+          "mae": 1.635
         },
         {
           "sample_size": 5000,
-          "mae": 0.859
+          "mae": 1.247
         }
       ],
       "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 3.17
+        },
+        {
+          "sample_size": 500,
+          "mae": 3.182
+        },
+        {
+          "sample_size": 1000,
+          "mae": 3.238
+        },
+        {
+          "sample_size": 5000,
+          "mae": 3.345
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 2.55
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.072
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.837
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.777
+        }
+      ],
+      "mixed_bias": [
         {
           "sample_size": 100,
           "mae": 3.345
         },
         {
           "sample_size": 500,
-          "mae": 3.45
+          "mae": 3.604
         },
         {
           "sample_size": 1000,
-          "mae": 3.512
+          "mae": 3.572
         },
         {
           "sample_size": 5000,
-          "mae": 3.656
-        }
-      ],
-      "lower_dropout": [
-        {
-          "sample_size": 100,
-          "mae": 2.194
-        },
-        {
-          "sample_size": 500,
-          "mae": 1.712
-        },
-        {
-          "sample_size": 1000,
-          "mae": 1.567
-        },
-        {
-          "sample_size": 5000,
-          "mae": 1.542
-        }
-      ],
-      "mixed_bias": [
-        {
-          "sample_size": 100,
-          "mae": 3.644
-        },
-        {
-          "sample_size": 500,
-          "mae": 4.077
-        },
-        {
-          "sample_size": 1000,
-          "mae": 4.01
-        },
-        {
-          "sample_size": 5000,
-          "mae": 4.076
+          "mae": 3.618
         }
       ]
     },
@@ -746,73 +746,73 @@
       "random": [
         {
           "sample_size": 100,
-          "mae": 1.334
+          "mae": 1.649
         },
         {
           "sample_size": 500,
-          "mae": 1.192
+          "mae": 1.413
         },
         {
           "sample_size": 1000,
-          "mae": 1.045
+          "mae": 1.295
         },
         {
           "sample_size": 5000,
-          "mae": 1.015
+          "mae": 1.138
         }
       ],
       "upper_bias": [
         {
           "sample_size": 100,
-          "mae": 2.352
+          "mae": 2.12
         },
         {
           "sample_size": 500,
-          "mae": 2.867
+          "mae": 2.411
         },
         {
           "sample_size": 1000,
-          "mae": 2.829
+          "mae": 2.394
         },
         {
           "sample_size": 5000,
-          "mae": 2.85
+          "mae": 2.408
         }
       ],
       "lower_dropout": [
         {
           "sample_size": 100,
-          "mae": 1.418
+          "mae": 1.682
         },
         {
           "sample_size": 500,
-          "mae": 1.389
+          "mae": 1.474
         },
         {
           "sample_size": 1000,
-          "mae": 1.548
+          "mae": 1.552
         },
         {
           "sample_size": 5000,
-          "mae": 1.555
+          "mae": 1.55
         }
       ],
       "mixed_bias": [
         {
           "sample_size": 100,
-          "mae": 2.732
+          "mae": 2.339
         },
         {
           "sample_size": 500,
-          "mae": 3.017
+          "mae": 2.506
         },
         {
           "sample_size": 1000,
-          "mae": 3.085
+          "mae": 2.551
         },
         {
           "sample_size": 5000,
-          "mae": 3.111
+          "mae": 2.568
         }
       ]
     },
@@ -820,73 +820,73 @@
       "random": [
         {
           "sample_size": 100,
-          "mae": 1.887
+          "mae": 2.023
         },
         {
           "sample_size": 500,
-          "mae": 1.672
+          "mae": 1.679
         },
         {
           "sample_size": 1000,
-          "mae": 1.701
+          "mae": 1.728
         },
         {
           "sample_size": 5000,
-          "mae": 1.661
+          "mae": 1.654
         }
       ],
       "upper_bias": [
         {
           "sample_size": 100,
-          "mae": 2.737
+          "mae": 2.381
         },
         {
           "sample_size": 500,
-          "mae": 2.943
+          "mae": 2.449
         },
         {
           "sample_size": 1000,
-          "mae": 3.132
+          "mae": 2.579
         },
         {
           "sample_size": 5000,
-          "mae": 3.182
+          "mae": 2.611
         }
       ],
       "lower_dropout": [
         {
           "sample_size": 100,
-          "mae": 1.781
+          "mae": 1.828
         },
         {
           "sample_size": 500,
-          "mae": 2.043
+          "mae": 1.943
         },
         {
           "sample_size": 1000,
-          "mae": 2.051
+          "mae": 1.878
         },
         {
           "sample_size": 5000,
-          "mae": 2.077
+          "mae": 1.876
         }
       ],
       "mixed_bias": [
         {
           "sample_size": 100,
-          "mae": 2.978
+          "mae": 2.526
         },
         {
           "sample_size": 500,
-          "mae": 3.258
+          "mae": 2.656
         },
         {
           "sample_size": 1000,
-          "mae": 3.409
+          "mae": 2.754
         },
         {
           "sample_size": 5000,
-          "mae": 3.39
+          "mae": 2.741
         }
       ]
     },
@@ -894,73 +894,73 @@
       "random": [
         {
           "sample_size": 100,
-          "mae": 1.183
+          "mae": 1.554
         },
         {
           "sample_size": 500,
-          "mae": 1.206
+          "mae": 1.427
         },
         {
           "sample_size": 1000,
-          "mae": 1.324
+          "mae": 1.4
         },
         {
           "sample_size": 5000,
-          "mae": 1.146
+          "mae": 1.267
         }
       ],
       "upper_bias": [
         {
           "sample_size": 100,
-          "mae": 2.529
+          "mae": 2.208
         },
         {
           "sample_size": 500,
-          "mae": 2.678
+          "mae": 2.282
         },
         {
           "sample_size": 1000,
-          "mae": 3.019
+          "mae": 2.51
         },
         {
           "sample_size": 5000,
-          "mae": 2.895
+          "mae": 2.435
         }
       ],
       "lower_dropout": [
         {
           "sample_size": 100,
-          "mae": 1.595
+          "mae": 1.75
         },
         {
           "sample_size": 500,
-          "mae": 1.491
+          "mae": 1.575
         },
         {
           "sample_size": 1000,
-          "mae": 1.806
+          "mae": 1.745
         },
         {
           "sample_size": 5000,
-          "mae": 1.696
+          "mae": 1.651
         }
       ],
       "mixed_bias": [
         {
           "sample_size": 100,
-          "mae": 2.63
+          "mae": 2.266
         },
         {
           "sample_size": 500,
-          "mae": 3.025
+          "mae": 2.514
         },
         {
           "sample_size": 1000,
-          "mae": 3.251
+          "mae": 2.654
         },
         {
           "sample_size": 5000,
-          "mae": 3.203
+          "mae": 2.624
         }
       ]
     },
@@ -968,265 +968,7 @@
       "random": [
         {
           "sample_size": 100,
-          "mae": 1.746
-        },
-        {
-          "sample_size": 500,
-          "mae": 1.769
-        },
-        {
-          "sample_size": 1000,
-          "mae": 1.755
-        },
-        {
-          "sample_size": 5000,
-          "mae": 1.609
-        }
-      ],
-      "upper_bias": [
-        {
-          "sample_size": 100,
-          "mae": 2.707
-        },
-        {
-          "sample_size": 500,
-          "mae": 3.026
-        },
-        {
-          "sample_size": 1000,
-          "mae": 3.323
-        },
-        {
-          "sample_size": 5000,
-          "mae": 3.242
-        }
-      ],
-      "lower_dropout": [
-        {
-          "sample_size": 100,
-          "mae": 1.863
-        },
-        {
-          "sample_size": 500,
-          "mae": 1.938
-        },
-        {
-          "sample_size": 1000,
-          "mae": 2.354
-        },
-        {
-          "sample_size": 5000,
-          "mae": 2.07
-        }
-      ],
-      "mixed_bias": [
-        {
-          "sample_size": 100,
-          "mae": 2.842
-        },
-        {
-          "sample_size": 500,
-          "mae": 3.31
-        },
-        {
-          "sample_size": 1000,
-          "mae": 3.532
-        },
-        {
-          "sample_size": 5000,
-          "mae": 3.446
-        }
-      ]
-    },
-    "생활과 윤리": {
-      "random": [
-        {
-          "sample_size": 100,
-          "mae": 1.839
-        },
-        {
-          "sample_size": 500,
-          "mae": 1.582
-        },
-        {
-          "sample_size": 1000,
-          "mae": 1.573
-        },
-        {
-          "sample_size": 5000,
-          "mae": 1.607
-        }
-      ],
-      "upper_bias": [
-        {
-          "sample_size": 100,
-          "mae": 2.623
-        },
-        {
-          "sample_size": 500,
-          "mae": 3.081
-        },
-        {
-          "sample_size": 1000,
-          "mae": 3.235
-        },
-        {
-          "sample_size": 5000,
-          "mae": 3.209
-        }
-      ],
-      "lower_dropout": [
-        {
-          "sample_size": 100,
-          "mae": 1.953
-        },
-        {
-          "sample_size": 500,
-          "mae": 1.958
-        },
-        {
-          "sample_size": 1000,
-          "mae": 2.232
-        },
-        {
-          "sample_size": 5000,
-          "mae": 2.067
-        }
-      ],
-      "mixed_bias": [
-        {
-          "sample_size": 100,
-          "mae": 2.985
-        },
-        {
-          "sample_size": 500,
-          "mae": 3.336
-        },
-        {
-          "sample_size": 1000,
-          "mae": 3.537
-        },
-        {
-          "sample_size": 5000,
-          "mae": 3.464
-        }
-      ]
-    },
-    "사회·문화": {
-      "random": [
-        {
-          "sample_size": 100,
-          "mae": 1.531
-        },
-        {
-          "sample_size": 500,
-          "mae": 1.195
-        },
-        {
-          "sample_size": 1000,
-          "mae": 1.232
-        },
-        {
-          "sample_size": 5000,
-          "mae": 1.282
-        }
-      ],
-      "upper_bias": [
-        {
-          "sample_size": 100,
-          "mae": 2.6
-        },
-        {
-          "sample_size": 500,
-          "mae": 2.916
-        },
-        {
-          "sample_size": 1000,
-          "mae": 3.062
-        },
-        {
-          "sample_size": 5000,
-          "mae": 3.023
-        }
-      ],
-      "lower_dropout": [
-        {
-          "sample_size": 100,
-          "mae": 1.763
-        },
-        {
-          "sample_size": 500,
-          "mae": 1.723
-        },
-        {
-          "sample_size": 1000,
-          "mae": 1.75
-        },
-        {
-          "sample_size": 5000,
-          "mae": 1.779
-        }
-      ],
-      "mixed_bias": [
-        {
-          "sample_size": 100,
-          "mae": 2.9
-        },
-        {
-          "sample_size": 500,
-          "mae": 3.145
-        },
-        {
-          "sample_size": 1000,
-          "mae": 3.335
-        },
-        {
-          "sample_size": 5000,
-          "mae": 3.251
-        }
-      ]
-    },
-    "한국지리": {
-      "random": [
-        {
-          "sample_size": 100,
-          "mae": 1.384
-        },
-        {
-          "sample_size": 500,
-          "mae": 1.353
-        },
-        {
-          "sample_size": 1000,
-          "mae": 1.302
-        },
-        {
-          "sample_size": 5000,
-          "mae": 1.24
-        }
-      ],
-      "upper_bias": [
-        {
-          "sample_size": 100,
-          "mae": 2.526
-        },
-        {
-          "sample_size": 500,
-          "mae": 2.919
-        },
-        {
-          "sample_size": 1000,
-          "mae": 2.945
-        },
-        {
-          "sample_size": 5000,
-          "mae": 2.915
-        }
-      ],
-      "lower_dropout": [
-        {
-          "sample_size": 100,
-          "mae": 1.486
+          "mae": 1.907
         },
         {
           "sample_size": 500,
@@ -1234,29 +976,287 @@
         },
         {
           "sample_size": 1000,
-          "mae": 1.768
+          "mae": 1.751
         },
         {
           "sample_size": 5000,
-          "mae": 1.696
+          "mae": 1.549
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.34
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.505
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.7
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.649
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 1.885
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.867
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.067
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.875
         }
       ],
       "mixed_bias": [
         {
           "sample_size": 100,
-          "mae": 2.741
+          "mae": 2.429
         },
         {
           "sample_size": 500,
-          "mae": 3.102
+          "mae": 2.692
         },
         {
           "sample_size": 1000,
-          "mae": 3.188
+          "mae": 2.83
         },
         {
           "sample_size": 5000,
-          "mae": 3.154
+          "mae": 2.776
+        }
+      ]
+    },
+    "생활과 윤리": {
+      "random": [
+        {
+          "sample_size": 100,
+          "mae": 1.948
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.643
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.644
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.526
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.276
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.55
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.652
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.636
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 1.961
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.843
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.0
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.866
+        }
+      ],
+      "mixed_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.49
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.717
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.84
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.796
+        }
+      ]
+    },
+    "사회·문화": {
+      "random": [
+        {
+          "sample_size": 100,
+          "mae": 1.685
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.358
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.381
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.333
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.258
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.437
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.537
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.514
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 1.799
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.7
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.714
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.708
+        }
+      ],
+      "mixed_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.441
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.588
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.706
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.653
+        }
+      ]
+    },
+    "한국지리": {
+      "random": [
+        {
+          "sample_size": 100,
+          "mae": 1.626
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.555
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.425
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.306
+        }
+      ],
+      "upper_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.219
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.453
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.47
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.449
+        }
+      ],
+      "lower_dropout": [
+        {
+          "sample_size": 100,
+          "mae": 1.668
+        },
+        {
+          "sample_size": 500,
+          "mae": 1.709
+        },
+        {
+          "sample_size": 1000,
+          "mae": 1.693
+        },
+        {
+          "sample_size": 5000,
+          "mae": 1.644
+        }
+      ],
+      "mixed_bias": [
+        {
+          "sample_size": 100,
+          "mae": 2.308
+        },
+        {
+          "sample_size": 500,
+          "mae": 2.566
+        },
+        {
+          "sample_size": 1000,
+          "mae": 2.621
+        },
+        {
+          "sample_size": 5000,
+          "mae": 2.6
         }
       ]
     },
@@ -1264,73 +1264,73 @@
       "random": [
         {
           "sample_size": 100,
-          "mae": 1.552
+          "mae": 1.761
         },
         {
           "sample_size": 500,
-          "mae": 1.252
+          "mae": 1.463
         },
         {
           "sample_size": 1000,
-          "mae": 1.214
+          "mae": 1.379
         },
         {
           "sample_size": 5000,
-          "mae": 1.241
+          "mae": 1.315
         }
       ],
       "upper_bias": [
         {
           "sample_size": 100,
-          "mae": 2.313
+          "mae": 2.103
         },
         {
           "sample_size": 500,
-          "mae": 2.897
+          "mae": 2.43
         },
         {
           "sample_size": 1000,
-          "mae": 3.06
+          "mae": 2.536
         },
         {
           "sample_size": 5000,
-          "mae": 2.861
+          "mae": 2.414
         }
       ],
       "lower_dropout": [
         {
           "sample_size": 100,
-          "mae": 1.453
+          "mae": 1.631
         },
         {
           "sample_size": 500,
-          "mae": 1.729
+          "mae": 1.719
         },
         {
           "sample_size": 1000,
-          "mae": 1.735
+          "mae": 1.69
         },
         {
           "sample_size": 5000,
-          "mae": 1.648
+          "mae": 1.589
         }
       ],
       "mixed_bias": [
         {
           "sample_size": 100,
-          "mae": 2.589
+          "mae": 2.265
         },
         {
           "sample_size": 500,
-          "mae": 3.112
+          "mae": 2.566
         },
         {
           "sample_size": 1000,
-          "mae": 3.199
+          "mae": 2.621
         },
         {
           "sample_size": 5000,
-          "mae": 3.106
+          "mae": 2.565
         }
       ]
     }
