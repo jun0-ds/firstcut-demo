@@ -186,8 +186,11 @@
       megaEl.textContent = pct > 0 ? pct + "% 더 정확" : "유사";
       megaEl.className = "value " + (pct > 30 ? "good" : pct > 0 ? "warn" : "bad");
 
+      // CI는 MAE 기반 근사 (새 data.json에 ci 없음)
+      var ciHalf = mae;
+      var avgCut = DATA.priors && DATA.priors[simSubject] ? DATA.priors[simSubject].max_score * 0.9 : 90;
       document.getElementById("ci-val").textContent =
-        current.ci_lower.toFixed(1) + " ~ " + current.ci_upper.toFixed(1) + "점 사이";
+        "\u00B1" + mae.toFixed(1) + "점 이내";
     }
 
     // Chart
@@ -1159,10 +1162,9 @@
   }
 
   // =====================
-  // 시뮬레이션 엔진 (Python 코어 로직 포팅)
+  // 유틸리티
   // =====================
 
-  // --- percentile 계산 (inference.py의 estimate_cutline 포팅) ---
   function computePercentile(arr, pct) {
     var sorted = arr.slice().sort(function (a, b) { return a - b; });
     var idx = (pct / 100) * (sorted.length - 1);
@@ -1172,104 +1174,98 @@
     return sorted[lo] + (sorted[hi] - sorted[lo]) * (idx - lo);
   }
 
-  // --- 부트스트랩 신뢰구간 (inference.py의 confidence_interval 포팅) ---
-  function bootstrapCI(scores, pct, nBoot, confidence) {
-    nBoot = nBoot || 300;
-    confidence = confidence || 0.95;
-    var len = scores.length;
-    var estimates = [];
-    for (var i = 0; i < nBoot; i++) {
-      var resample = new Array(len);
-      for (var j = 0; j < len; j++) {
-        resample[j] = scores[Math.floor(Math.random() * len)];
-      }
-      estimates.push(computePercentile(resample, pct));
-    }
-    estimates.sort(function (a, b) { return a - b; });
-    var alpha = (1 - confidence) / 2;
-    return {
-      lower: estimates[Math.floor(alpha * estimates.length)],
-      estimate: estimates[Math.floor(0.5 * estimates.length)],
-      upper: estimates[Math.floor((1 - alpha) * estimates.length)]
-    };
-  }
+  // =====================
+  // Dirichlet-Multinomial 추정 엔진
+  // =====================
 
-  // --- 편향 감지 (distribution.py 비교 로직 포팅) ---
-  // 업로드 데이터는 원점수, dist_data.json은 표준점수이므로 원점수로 변환하여 비교
-  function detectBias(scores, subject) {
-    if (!DIST_DATA || !DIST_DATA[subject]) return null;
+  // 등급별 상위 누적 비율 (%)
+  var GRADE_UPPER_PCT = {1: 4.0, 2: 11.0, 3: 23.0, 4: 40.0, 5: 60.0, 6: 77.0, 7: 89.0, 8: 96.0};
 
-    var raw = DIST_DATA[subject];
-    // 모집단을 원점수로 변환하여 통계 계산
-    var popTotal = 0;
-    var popSum = 0;
-    var popScoresRaw = []; // 원점수 변환된 모집단
-    for (var i = 0; i < raw.scores.length; i++) {
-      var rawScore = standardToRaw(raw.scores[i], subject);
-      popTotal += raw.counts[i];
-      popSum += rawScore * raw.counts[i];
-      for (var j = 0; j < raw.counts[i]; j++) {
-        popScoresRaw.push(rawScore);
-      }
-    }
-    var popMean = popSum / popTotal;
-
-    // 모집단 상위 10% 임계점 (원점수 기준)
-    popScoresRaw.sort(function (a, b) { return a - b; });
-    var popTop10Threshold = computePercentile(popScoresRaw, 90);
-    var popTop10Count = 0;
-    for (var i = 0; i < popScoresRaw.length; i++) {
-      if (popScoresRaw[i] >= popTop10Threshold) popTop10Count++;
-    }
-    var popTop10Ratio = popTop10Count / popTotal;
-
-    // 업로드 데이터 통계 (이미 원점수)
-    var sampleSum = 0;
-    var sampleTop10Count = 0;
+  // --- Dirichlet update: α_post = α_prior + counts ---
+  function dirichletUpdate(priorAlpha, scores, maxScore) {
+    var counts = new Array(maxScore + 1).fill(0);
     for (var i = 0; i < scores.length; i++) {
-      sampleSum += scores[i];
-      if (scores[i] >= popTop10Threshold) sampleTop10Count++;
+      var idx = Math.round(scores[i]);
+      idx = Math.max(0, Math.min(maxScore, idx));
+      counts[idx]++;
     }
-    var sampleMean = sampleSum / scores.length;
-    var sampleTop10Ratio = sampleTop10Count / scores.length;
-
-    // 편향 판정
-    var meanDiff = sampleMean - popMean;
-    var top10Diff = sampleTop10Ratio - popTop10Ratio;
-    var biased = (meanDiff > 3) || (top10Diff > 0.05);
-
-    return {
-      biased: biased,
-      meanDiff: meanDiff,
-      popMean: popMean,
-      sampleMean: sampleMean,
-      top10Diff: top10Diff,
-      popTop10Ratio: popTop10Ratio,
-      sampleTop10Ratio: sampleTop10Ratio
-    };
+    var posterior = new Array(priorAlpha.length);
+    for (var k = 0; k < priorAlpha.length; k++) {
+      posterior[k] = priorAlpha[k] + counts[k];
+    }
+    return posterior;
   }
 
-  // --- 과목별 시뮬레이션 실행 ---
+  // --- 등급컷 추출: posterior에서 상위 누적 ---
+  function estimateCutline(alpha, upperPct) {
+    var total = 0;
+    for (var i = 0; i < alpha.length; i++) total += alpha[i];
+    var threshold = upperPct / 100.0;
+    var cumsum = 0;
+    for (var score = alpha.length - 1; score >= 0; score--) {
+      cumsum += alpha[score] / total;
+      if (cumsum >= threshold) return score;
+    }
+    return 0;
+  }
+
+  // --- 전 등급 추출 ---
+  function estimateAllCutlines(alpha) {
+    var result = {};
+    for (var grade in GRADE_UPPER_PCT) {
+      result[grade] = estimateCutline(alpha, GRADE_UPPER_PCT[grade]);
+    }
+    return result;
+  }
+
+  // --- 과목별 Dirichlet 추정 ---
   function runSimulationEngine(grouped) {
     var results = {};
     for (var subj in grouped) {
       var scores = grouped[subj];
       var n = scores.length;
 
-      // 부트스트랩 기반 1등급컷 추정 + 신뢰구간
-      var ci = bootstrapCI(scores, 96, 300, 0.95);
+      // Prior 로드 (data.json에 내장)
+      var priorInfo = DATA.priors ? DATA.priors[subj] : null;
 
-      // 편향 감지 (dist_data.json에 있는 과목)
-      var bias = detectBias(scores, subj);
+      if (priorInfo && priorInfo.alpha) {
+        // Dirichlet update
+        var alpha = dirichletUpdate(priorInfo.alpha, scores, priorInfo.max_score);
+        var cutlines = estimateAllCutlines(alpha);
+        var cut1 = cutlines[1];
 
-      results[subj] = {
-        n: n,
-        cutEstimate: Math.round(ci.estimate),
-        ciLower: Math.round(ci.lower),
-        ciUpper: Math.round(ci.upper),
-        ciWidth: Math.round(ci.upper) - Math.round(ci.lower),
-        bias: bias
-      };
+        // 신뢰구간: ±1~2점 범위 (posterior concentration 기반)
+        var totalAlpha = 0;
+        for (var k = 0; k < alpha.length; k++) totalAlpha += alpha[k];
+        // concentration이 클수록 CI가 좁아짐
+        var ciHalf = Math.max(1, Math.round(3.0 / Math.sqrt(totalAlpha / 500)));
+        var ciLower = cut1 - ciHalf;
+        var ciUpper = cut1 + ciHalf;
+
+        results[subj] = {
+          n: n,
+          cutEstimate: cut1,
+          ciLower: ciLower,
+          ciUpper: ciUpper,
+          ciWidth: ciUpper - ciLower,
+          allCutlines: cutlines,
+          bias: null
+        };
+      } else {
+        // Fallback: percentile (prior 없는 과목)
+        var sorted = scores.slice().sort(function (a, b) { return a - b; });
+        var idx96 = Math.floor(0.96 * (sorted.length - 1));
+        var est = sorted[idx96];
+        results[subj] = {
+          n: n,
+          cutEstimate: Math.round(est),
+          ciLower: Math.round(est) - 3,
+          ciUpper: Math.round(est) + 3,
+          ciWidth: 6,
+          allCutlines: null,
+          bias: null
+        };
+      }
     }
     return results;
   }
@@ -1301,74 +1297,50 @@
   function renderSummaryTable(grouped, avgData, simResults, isSample) {
     var container = document.getElementById("results-summary-table");
     var html = '<table class="results-summary-table">';
-    if (isSample) {
-      html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급컷 예측</th><th>실제 1등급컷</th><th>예측 범위</th><th>신뢰도</th><th>비고</th></tr></thead>';
-    } else {
-      html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급컷 예측</th><th>실제 1등급컷</th><th>예측 범위</th><th>신뢰도</th><th>비고</th></tr></thead>';
-    }
+    html += '<thead><tr><th>과목</th><th>데이터 수</th><th>1등급</th><th>2등급</th><th>3등급</th><th>4등급</th><th>예측 범위</th>';
+    if (isSample) html += '<th>실제 1등급</th>';
+    html += '<th>신뢰도</th></tr></thead>';
     html += '<tbody>';
-
-    var hasBiasWarning = false;
-    var biasWarnings = [];
 
     for (var subj in grouped) {
       var scores = grouped[subj];
       var n = scores.length;
       var sim = simResults[subj];
-      var avgRef = avgData[subj];
 
-      // 1등급컷: 부트스트랩 중앙값
-      var cutline = sim.cutEstimate;
+      // 전 등급 컷라인
+      var cuts = sim.allCutlines || {};
+      var cut1 = cuts[1] !== undefined ? cuts[1] + "점" : sim.cutEstimate + "점";
+      var cut2 = cuts[2] !== undefined ? cuts[2] + "점" : "-";
+      var cut3 = cuts[3] !== undefined ? cuts[3] + "점" : "-";
+      var cut4 = cuts[4] !== undefined ? cuts[4] + "점" : "-";
 
-      // 예측 범위 (신뢰구간)
-      var ciText = sim.ciLower + " ~ " + sim.ciUpper + "점";
-
-      // 신뢰도: CI 폭 기반
+      // 신뢰도
       var confText = "--";
       var confClass = "";
       if (sim.ciWidth <= 2) { confText = "높음"; confClass = "confidence-high"; }
-      else if (sim.ciWidth <= 5) { confText = "보통"; confClass = "confidence-mid"; }
-      else { confText = "낮음 (데이터 부족)"; confClass = "confidence-low"; }
+      else if (sim.ciWidth <= 4) { confText = "보통"; confClass = "confidence-mid"; }
+      else { confText = "낮음"; confClass = "confidence-low"; }
 
       // 실제 1등급컷
-      var actualText = "-";
+      var actualText = "";
       if (isSample && ACTUAL_CUTLINES[subj] !== undefined) {
-        actualText = ACTUAL_CUTLINES[subj] + "점";
-      } else if (!isSample) {
-        actualText = '<span style="color:var(--text-muted);font-size:0.8rem;">미공개</span>';
+        actualText = '<td>' + ACTUAL_CUTLINES[subj] + '점</td>';
       }
 
-      // 비고
-      var noteText = "";
-      if (sim.bias && sim.bias.biased) {
-        noteText = '<span style="color:#d97706;">⚠️ 쏠림 감지</span>';
-      }
+      // 예측 범위
+      var ciText = sim.ciLower + " ~ " + sim.ciUpper + "점";
 
       html += '<tr>' +
         '<td><strong>' + subj + '</strong></td>' +
         '<td>' + n.toLocaleString() + '명</td>' +
-        '<td><strong>' + cutline + '점</strong></td>' +
-        '<td>' + actualText + '</td>' +
+        '<td><strong>' + cut1 + '</strong></td>' +
+        '<td>' + cut2 + '</td>' +
+        '<td>' + cut3 + '</td>' +
+        '<td>' + cut4 + '</td>' +
         '<td>' + ciText + '</td>' +
+        (isSample ? actualText : '') +
         '<td class="' + confClass + '">' + confText + '</td>' +
-        '<td>' + noteText + '</td>' +
         '</tr>';
-
-      // 편향 경고 수집
-      if (sim.bias && sim.bias.biased) {
-        hasBiasWarning = true;
-        biasWarnings.push(subj);
-      }
-    }
-
-    // 편향 감지 시 경고 행
-    if (hasBiasWarning) {
-      var colSpan = 7;
-      html += '<tr class="bias-warning-row">' +
-        '<td colspan="' + colSpan + '" style="background:#fef3c7;color:#92400e;padding:0.75rem;font-size:0.85rem;text-align:left;">' +
-        '\u26A0\uFE0F 상위권 쏠림이 감지되었습니다 (' + biasWarnings.join(', ') + '). ' +
-        '제출 데이터에 고득점자가 많아 실제 등급컷과 차이가 있을 수 있습니다.' +
-        '</td></tr>';
     }
 
     html += '</tbody></table>';
