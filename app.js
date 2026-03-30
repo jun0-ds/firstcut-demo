@@ -57,7 +57,7 @@
   var STD_TO_RAW_MAPPINGS = {
     "국어": [
       [147, 100], [133, 91], [126, 87], [117, 81],
-      [107, 74], [94, 66], [83, 59], [73, 52], [66, 48]
+      [107, 74], [94, 66], [83, 59], [73, 52], [66, 48], [56, 42], [47, 37]
     ],
     "수학": [
       [139, 100], [128, 88], [124, 84], [119, 78],
@@ -463,15 +463,44 @@
     });
   }
 
+  function stdDistToRawDist(stdScores, stdCounts, subject) {
+    // 표준점수 도수분포 → 원점수 도수분포 변환 (같은 원점수끼리 합산)
+    var rawMap = {};
+    for (var i = 0; i < stdScores.length; i++) {
+      var rawScore = standardToRaw(stdScores[i], subject);
+      rawMap[rawScore] = (rawMap[rawScore] || 0) + stdCounts[i];
+    }
+    // 0점부터 만점까지 채워서 전체 분포 표시
+    var isMain = (subject === "국어" || subject === "수학");
+    var maxScore = isMain ? 100 : 50;
+    var rawScores = [];
+    var rawCounts = [];
+    for (var s = 0; s <= maxScore; s++) {
+      rawScores.push(s);
+      rawCounts.push(rawMap[s] || 0);
+    }
+    // 가우시안 스무딩 (window=5, 2패스) — 합산 뭉침으로 인한 톱니 제거
+    function smooth5(arr) {
+      var out = arr.slice();
+      for (var i = 2; i < arr.length - 2; i++) {
+        out[i] = Math.round(arr[i-2]*0.06 + arr[i-1]*0.24 + arr[i]*0.4 + arr[i+1]*0.24 + arr[i+2]*0.06);
+      }
+      return out;
+    }
+    var smoothed = smooth5(smooth5(rawCounts));
+    return { scores: rawScores, counts: smoothed };
+  }
+
   function generateDistData(scenario) {
     if (!DIST_DATA || !DIST_DATA["국어"]) return null;
 
-    const raw = DIST_DATA["국어"];
-    // scores는 내림차순(147→116), 차트에서는 오름차순(116→147)으로 표시
-    const scores = [...raw.scores].reverse();
-    const counts = [...raw.counts].reverse();
+    const stdRaw = DIST_DATA["국어"];
+    // 표준점수 → 원점수 변환
+    const converted = stdDistToRawDist(stdRaw.scores, stdRaw.counts, "국어");
+    const scores = converted.scores;
+    const counts = converted.counts;
 
-    const ACTUAL_CUT = 133; // 2026 수능 국어 실제 1등급컷
+    const ACTUAL_CUT = 91; // 2026 수능 국어 실제 1등급컷 (원점수)
 
     let displayCounts;
     let predictCut;
@@ -491,7 +520,7 @@
         return c;
       });
       // 쏠린 샘플로 예측 → 예측컷이 실제보다 낮게(왼쪽으로) 밀림
-      predictCut = ACTUAL_CUT - 3;
+      predictCut = ACTUAL_CUT - 2;
     } else {
       // 보정 후: 거의 원래 분포로 복원, 약간의 잔여 차이
       displayCounts = counts.map((c, i) => {
@@ -572,8 +601,8 @@
     };
 
     // y축 고정: 쏠림 있을 때 부풀림이 시각적으로 보이도록 원본 분포 기준으로 고정
-    const rawCounts = [...DIST_DATA["국어"].counts];
-    const maxVal = Math.max(...rawCounts);
+    const baseConverted = stdDistToRawDist(DIST_DATA["국어"].scores, DIST_DATA["국어"].counts, "국어");
+    const maxVal = Math.max(...baseConverted.counts);
 
     distChart = new Chart(ctx, {
       type: "line",
@@ -607,7 +636,7 @@
         scales: {
           x: {
             display: true,
-            title: { display: true, text: "점수", font: { size: 12 } },
+            title: { display: true, text: "원점수", font: { size: 12 } },
             ticks: {
               maxTicksLimit: 8,
               font: { size: 10 },
